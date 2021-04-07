@@ -8,7 +8,7 @@ from flask_uploads import UploadSet, IMAGES, configure_uploads
 db = SQLAlchemy()
 login_manager = LoginManager()
 csrf = CSRFProtect()
-photos = UploadSet('photos', IMAGES)
+#photos = UploadSet('photos', IMAGES)
 
 
 def create_app(config_classname):
@@ -25,7 +25,7 @@ def create_app(config_classname):
     login_manager.login_view = 'auth.login'
     login_manager.init_app(app)
     csrf.init_app(app)
-    configure_uploads(app, photos)
+    #configure_uploads(app, photos)
 
     # CSRFProtect extension conflicted with Dash, line below exclude Dash from CSRFProtect
     # (Adapted from https://stackoverflow.com/questions/51585596/dash-callbacks-not-working-if-dash-app-is-created-and-called-from-flask)

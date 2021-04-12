@@ -18,6 +18,7 @@ def create_app(config_classname):
     """
     app = Flask(__name__)
     app.config.from_object(config_classname)
+    # app.static_folder = 'static'
 
     # Initialize the SQAlchemy object for the Flask app instance
     db.init_app(app)

@@ -3,12 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/bootstrap.css') }}">
-
+    {% block javascript %}{% endblock %}
     {# Add to the head section #}
     <title>{{ title }}</title>
-
 </head>
 <body>
 
@@ -22,9 +20,9 @@
     {# Displays flashed messages on a page #}
     {% with messages = get_flashed_messages() %}
         {% if messages %}
-            <ul>
+            <ul id="messages" class="list-unstyled">
                 {% for message in messages %}
-                    <p>{{ message }}</p>
+                    <li class="alert alert-primary" role="alert">{{ message }}</li>
                 {% endfor %}
             </ul>
         {% endif %}

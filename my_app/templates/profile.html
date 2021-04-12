@@ -3,7 +3,7 @@
 {%  from "_formhelpers.html" import render_field %}
 {%  block content %}
     <h2>Set up your profile </h2>
-    <h3>Username {{ username }}</h3>
+    <h3>Username: {{ username }}</h3>
     <form method="POST" action="" enctype="multipart/form-data">
         {{ form.csrf_token }}
         <dl>

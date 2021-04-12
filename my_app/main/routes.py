@@ -13,10 +13,3 @@ def index(name):
         name = current_user.username
     return render_template('index.html', title="Home page",
                            name=name)
-
-
-# @main_bp.route('/delete_cookie')
-# def delete_cookie():
-#     response = make_response(redirect(url_for('main_bp.index')))
-#     response.set_cookie('name', 'traveler', expires=datetime.now())
-#     return response

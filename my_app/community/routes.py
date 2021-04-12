@@ -49,7 +49,7 @@ def create_profile():
         db.session.add(profile)
         db.session.commit()
         return redirect(url_for('community_bp.display_profile', username=profile.username))
-    return render_template('profile.html', form=form)
+    return render_template('profile.html', form=form, username=current_user.username)
 
 
 @community_bp.route('/update_profile', methods=['GET', 'POST'])
@@ -71,7 +71,7 @@ def update_profile():
         # profile.tubeline = form.tubeline.data.tubeline
         db.session.commit()
         return redirect(url_for('community_bp.display_profile', username=profile.username))
-    return render_template('profile.html', form=form)
+    return render_template('profile.html', form=form, username=profile.username)
 
 
 @community_bp.route('/display_profile', methods=['GET', 'POST'])

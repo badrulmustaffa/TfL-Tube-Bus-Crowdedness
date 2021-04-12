@@ -24,16 +24,9 @@ class User(UserMixin, db.Model):
 class Profile(db.Model):
     __tablename__ = "profile"
     id = db.Column(db.Integer, primary_key=True)
-    photo = db.Column(db.Text)
-    bio = db.Column(db.Text)
     username = db.Column(db.Text, unique=True, nullable=False)
+    bio = db.Column(db.Text)
+    photo = db.Column(db.Text)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
 
 
-# class TubeLine(db.Model):
-#     __tablename__ = "tubeline"
-#     index = db.Column(db.Text, nullable=False, primary_key=True)
-#     tubeline = db.Column(db.Text, nullable=False)
-#
-#     def __repr__(self):
-#         return self.tubeline

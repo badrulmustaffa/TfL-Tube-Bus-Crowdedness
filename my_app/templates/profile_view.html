@@ -1,0 +1,23 @@
+{% extends 'layout.html' %}
+{% set title = 'Profile Display' %}
+{% from "_formhelpers.html" import render_field %}
+{% block content %}
+    {% for result, url in profiles %}
+        <div class="card" style="width: 18rem;">
+            <img class="card-img-top" src="{{ url }}" alt="User profile photo" width="300" height="300">
+            <div class="card-body">
+                <h4 class="card-title">Username: {{ result.username }}</h4>
+                <p class="card-text"> Bio: {{ result.bio }}</p>
+                <p>History:</p>
+
+                {% if result.username == current_user.username %}
+                    <form action="{{ url_for("community_bp.update_profile") }}">
+                        <button type="submit">Edit profile</button>
+                    </form>
+                {% endif %}
+
+                <hr>
+            </div>
+        </div>
+    {% endfor %}
+{% endblock %}

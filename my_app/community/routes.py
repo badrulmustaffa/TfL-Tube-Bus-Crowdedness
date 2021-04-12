@@ -50,7 +50,7 @@ def create_profile():
         db.session.add(profile)
         db.session.commit()
         return redirect(url_for('community_bp.display_profile', username=profile.username))
-    return render_template('profile.html', form=form, username=current_user.username)
+    return render_template('profile.html', form=form, username=current_user.username, message='New profile')
 
 
 @community_bp.route('/update_profile', methods=['GET', 'POST'])
@@ -72,7 +72,7 @@ def update_profile():
         # profile.tubeline = form.tubeline.data.tubeline
         db.session.commit()
         return redirect(url_for('community_bp.display_profile', username=profile.username))
-    return render_template('profile.html', form=form, username=profile.username)
+    return render_template('profile.html', form=form, username=profile.username, message='Profile update')
 
 
 @community_bp.route('/display_profile', methods=['GET', 'POST'])
@@ -87,10 +87,10 @@ def display_profile(username=None):
                 flash("Enter a name to search for")
                 return redirect(url_for('community_bp.index'))
             results = Profile.query.filter(Profile.username.contains(term)).all()
-
+            html = 'profile_display.html'
     else:
         results = Profile.query.filter_by(username=username).all()
-
+        html = 'profile_view.html'
     if not results:
         flash("Username not found")
         return redirect(url_for('community_bp.index'))
@@ -100,5 +100,5 @@ def display_profile(username=None):
         if result.photo:
             url = photos.url(result.photo)
             urls.append(url)
-    return render_template('profile_display.html', profiles=zip(results, urls))
+    return render_template(html, profiles=zip(results, urls))
 

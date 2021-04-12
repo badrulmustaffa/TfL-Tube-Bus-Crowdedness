@@ -44,6 +44,7 @@ def login():
         if not is_safe_url(next):
             return abort(400)
 
+        flash("You are logged in!")
         return redirect(next or url_for('main_bp.index', name=user.username))
     return render_template('login.html', title='Login', form=form)
 

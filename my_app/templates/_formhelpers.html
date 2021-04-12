@@ -2,7 +2,7 @@
     <div class="form-group">
         <dt>{{ field.label }}
         <dd>{{ field(**kwargs)|safe }}
-            {%  if field.errors %}
+            {% if field.errors %}
                 <ul class=errors>
                     {% for error in field.errors %}
                         <li>{{ error }}</li>
@@ -10,6 +10,5 @@
                 </ul>
             {% endif %}
         </dd>
-    </div>>
+    </div>
 {% endmacro %}
-

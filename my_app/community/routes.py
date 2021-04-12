@@ -26,6 +26,7 @@ def profile():
     if profile:
         return redirect(url_for('community_bp.display_profile', username=current_user.username))
     else:
+        flash("No profile found")
         return redirect((url_for('community_bp.create_profile')))
 
 

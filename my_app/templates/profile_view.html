@@ -12,7 +12,7 @@
 
                 {% if result.username == current_user.username %}
                     <form action="{{ url_for("community_bp.update_profile") }}">
-                        <button type="submit">Edit profile</button>
+                        <button type="submit" class="btn btn-primary">Edit profile</button>
                     </form>
                 {% endif %}
 

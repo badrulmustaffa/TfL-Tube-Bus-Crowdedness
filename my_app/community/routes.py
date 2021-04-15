@@ -26,7 +26,7 @@ def profile():
     if profile:
         return redirect(url_for('community_bp.display_profile', username=current_user.username))
     else:
-        flash("No profile found")
+        flash("No profile found. Please create a new one")
         return redirect((url_for('community_bp.create_profile')))
 
 
@@ -35,14 +35,15 @@ def profile():
 def create_profile():
     form = ProfileForm()
     if request.method == 'POST' and form.validate_on_submit():
-        # Set photo name to none if no photos attached
-        filename = None
+        # Set photo name to default if no photos attached
+        filename = 'default.jpg'
         # CHeck if form contains photo
         if 'photo' in request.files:
             # if the filename is not empty, save the the photo
             if request.files['photo'].filename != '':
                 # Save to photos in my_app
                 filename = photos.save(request.files['photo'])
+
 
         # Create a profile for database
         profile = Profile(photo=filename, bio=form.bio.data,
@@ -59,17 +60,16 @@ def update_profile():
     # profile = Profile.Query
     profile = Profile.query.join(User).filter_by(id=current_user.id).first()
     form = ProfileForm(obj=profile) # Prepopulate
-
     if request.method == 'POST' and form.validate_on_submit():
+        filename = profile.photo
         if 'photo' in request.files:
+            if request.files['photo'].filename != '':
             # Update the saved photos in my_app
-            filename = photos.save(request.files['photo'])
-            profile.photo = filename
+                filename = photos.save(request.files['photo'])
 
         # Update other detail
-        # profile.username = form.username.data
         profile.bio = form.bio.data
-        # profile.tubeline = form.tubeline.data.tubeline
+        profile.photo = filename
         db.session.commit()
         return redirect(url_for('community_bp.display_profile', username=profile.username))
     return render_template('profile.html', form=form, username=profile.username, message='Profile update')
@@ -101,4 +101,3 @@ def display_profile(username=None):
             url = photos.url(result.photo)
             urls.append(url)
     return render_template(html, profiles=zip(results, urls))
-

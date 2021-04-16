@@ -2,17 +2,21 @@
 {% set title = 'Navigation' %}
 {% from "_formhelpers.html" import render_field %}
 {% block content %}
-    <h2>Navigate</h2>
-    <p>{{ message }}</p>
+    <h2>{{ title }}</h2>
+    <p>Welcome {{ name }}!</p>
+    <p>Please input your journey detail below:</p>
     <div class="card" style="width: 18rem;">
         <div class="card-body">
-            <form method="POST" action="{{ url_for('main_bp.navigation') }}">
+            <form method="POST" action="{{ url_for('main_bp.index') }}">
                 {{ form.csrf_token }}
                 <dl>
                     {{ render_field(form.mean, class="form-control") }}
                     {{ render_field(form.start, class="form-control") }}
                     {{ render_field(form.end, class="form-control") }}
                 </dl>
+                    <form action="">
+                        <button type="submit" class="btn btn-outline-primary">Show map</button>
+                    </form>
                 <br>
                 <button type="submit" class="btn btn-primary">Go</button>
                 <button type="reset" class="btn btn-primary">Clear</button>

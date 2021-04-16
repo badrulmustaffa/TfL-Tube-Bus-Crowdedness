@@ -10,17 +10,34 @@ from my_app.main.functions import RenderMap
 main_bp = Blueprint('main_bp', __name__)
 
 
-@main_bp.route('/', defaults={'name': 'traveler'})
-@main_bp.route('/<name>')
+# @main_bp.route('/', defaults={'name': 'traveler'})
+# @main_bp.route('/<name>')
+# def index(name):
+#     if not current_user.is_anonymous:
+#         name = current_user.username
+#     return render_template('index.html', title="Home page",
+#                            name=name)
+#
+#
+# @main_bp.route('/navigation', methods=['GET', 'POST'])
+# def navigation():
+#     form = NavigationForm()
+#     if request.method == 'POST':
+#         map = RenderMap(form.mean.data)
+#         start = form.start.data
+#         end = form.end.data
+#
+#         flash("Well Done")
+#         return redirect(url_for('main_bp.index'))
+#     return render_template('navigation.html', form=form)
+
+
+@main_bp.route('/', defaults={'name': 'traveler'}, methods=['GET', 'POST'])
+@main_bp.route('/<name>', methods=['GET', 'POST'])
 def index(name):
     if not current_user.is_anonymous:
         name = current_user.username
-    return render_template('index.html', title="Home page",
-                           name=name)
 
-
-@main_bp.route('/navigation', methods=['GET', 'POST'])
-def navigation():
     form = NavigationForm()
     if request.method == 'POST':
         map = RenderMap(form.mean.data)
@@ -29,4 +46,6 @@ def navigation():
 
         flash("Well Done")
         return redirect(url_for('main_bp.index'))
-    return render_template('navigation.html', form=form)
+
+    return render_template('navigation.html', title="Navigate",
+                           name=name, form=form)

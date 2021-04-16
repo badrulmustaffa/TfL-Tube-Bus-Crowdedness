@@ -6,7 +6,8 @@ from wtforms.validators import data_required, DataRequired
 
 class NavigationForm(FlaskForm):
     mean = SelectField('Select your mean:', choices=['Bus', 'Tube'], validators=[DataRequired()])
-    start = SelectField('Start', choices=['Euston', "King's Cross"], validators=[DataRequired()])
+    start = SelectField('Start', choices=['Euston', "King's Cross"],
+                        validators=[DataRequired()])
     end = SelectField('End', choices=['Euston', "King's Cross"], validators=[DataRequired()])
     # start = QuerySelectField(label='Your favourite tube line', query_factory=lambda: TubeLine.query.all(), \
     #            get_label='tubeline', allow_blank=True)

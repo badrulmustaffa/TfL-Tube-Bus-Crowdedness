@@ -1,11 +1,13 @@
 from flask_wtf import FlaskForm
 from wtforms import SelectField
 from wtforms.ext.sqlalchemy.fields import QuerySelectField
-from wtforms.validators import data_required
+from wtforms.validators import data_required, DataRequired
 
 
 class NavigationForm(FlaskForm):
-    mean = SelectField(label='Select your mean:', validators=[data_required()])
+    mean = SelectField('Select your mean:', choices=['Bus', 'Tube'], validators=[DataRequired()])
+    start = SelectField('Start', choices=['Euston', "King's Cross"], validators=[DataRequired()])
+    end = SelectField('End', choices=['Euston', "King's Cross"], validators=[DataRequired()])
     # start = QuerySelectField(label='Your favourite tube line', query_factory=lambda: TubeLine.query.all(), \
     #            get_label='tubeline', allow_blank=True)
     # end = QuerySelectField(label='Your favourite tube line', query_factory=lambda: TubeLine.query.all(), \

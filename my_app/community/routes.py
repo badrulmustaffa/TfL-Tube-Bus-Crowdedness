@@ -22,9 +22,11 @@ def index(name):
 @community_bp.route('/profile', methods=['GET', 'POST'])
 @login_required
 def profile():
-    profile = Profile.query.join(User).filter(User.id == current_user.id).first()
+    profile = Profile.query.join(User).filter(
+        User.id == current_user.id).first()
     if profile:
-        return redirect(url_for('community_bp.display_profile', username=current_user.username))
+        return redirect(url_for('community_bp.display_profile',
+                                username=current_user.username))
     else:
         flash("No profile found. Please create a new one")
         return redirect((url_for('community_bp.create_profile')))
@@ -44,14 +46,17 @@ def create_profile():
                 # Save to photos in my_app
                 filename = photos.save(request.files['photo'])
 
-
         # Create a profile for database
         profile = Profile(photo=filename, bio=form.bio.data,
-                          username=current_user.username, user_id=current_user.id)
+                          username=current_user.username,
+                          user_id=current_user.id)
         db.session.add(profile)
         db.session.commit()
-        return redirect(url_for('community_bp.display_profile', username=profile.username))
-    return render_template('profile.html', form=form, username=current_user.username, message='New profile')
+        return redirect(
+            url_for('community_bp.display_profile', username=profile.username))
+    return render_template('profile.html', form=form,
+                           username=current_user.username,
+                           message='New profile')
 
 
 @community_bp.route('/update_profile', methods=['GET', 'POST'])
@@ -59,20 +64,22 @@ def create_profile():
 def update_profile():
     # profile = Profile.Query
     profile = Profile.query.join(User).filter_by(id=current_user.id).first()
-    form = ProfileForm(obj=profile) # Prepopulate
+    form = ProfileForm(obj=profile)  # Prepopulate
     if request.method == 'POST' and form.validate_on_submit():
         filename = profile.photo
         if 'photo' in request.files:
             if request.files['photo'].filename != '':
-            # Update the saved photos in my_app
+                # Update the saved photos in my_app
                 filename = photos.save(request.files['photo'])
 
         # Update other detail
         profile.bio = form.bio.data
         profile.photo = filename
         db.session.commit()
-        return redirect(url_for('community_bp.display_profile', username=profile.username))
-    return render_template('profile.html', form=form, username=profile.username, message='Profile update')
+        return redirect(
+            url_for('community_bp.display_profile', username=profile.username))
+    return render_template('profile.html', form=form, username=profile.username,
+                           message='Profile update')
 
 
 @community_bp.route('/display_profile', methods=['GET', 'POST'])
@@ -86,7 +93,8 @@ def display_profile(username=None):
             if term == "":
                 flash("Enter a name to search for")
                 return redirect(url_for('community_bp.index'))
-            results = Profile.query.filter(Profile.username.contains(term)).all()
+            results = Profile.query.filter(
+                Profile.username.contains(term)).all()
             html = 'profile_display.html'
     else:
         results = Profile.query.filter_by(username=username).all()

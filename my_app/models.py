@@ -30,3 +30,4 @@ class Profile(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
 
 
+

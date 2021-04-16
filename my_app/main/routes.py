@@ -3,6 +3,8 @@
 from flask import Blueprint, render_template, request, make_response, redirect, url_for, session
 from flask_login import current_user
 
+from my_app.main.forms import NavigationForm
+
 main_bp = Blueprint('main_bp', __name__)
 
 
@@ -13,3 +15,10 @@ def index(name):
         name = current_user.username
     return render_template('index.html', title="Home page",
                            name=name)
+
+
+@main_bp.route('/navigation')
+def navigation():
+    form = NavigationForm()
+
+    return render_template('navigation.html')

@@ -7,20 +7,26 @@
     <p>Please input your journey detail below:</p>
     <div class="card" style="width: 18rem;">
         <div class="card-body">
-            <form method="POST" action="{{ url_for('main_bp.index') }}">
+            <form method="POST" action="{{ url_for('main_bp.map') }}">
                 {{ form.csrf_token }}
                 <dl>
                     {{ render_field(form.mean, class="form-control") }}
                     {{ render_field(form.start, class="form-control") }}
                     {{ render_field(form.end, class="form-control") }}
                 </dl>
-                    <form action="">
-                        <button type="submit" class="btn btn-outline-primary">Show map</button>
-                    </form>
+{#                <button type="submit" class="btn btn-outline-primary" name="btn-identifier" value="map">Show map</button>#}
                 <br>
-                <button type="submit" class="btn btn-primary">Go</button>
+                <button type="submit" class="btn btn-primary">View on map</button>
                 <button type="reset" class="btn btn-primary">Clear</button>
             </form>
         </div>
     </div>
 {% endblock %}
+
+{#<form method="POST" action={{url_for('suggestion')}}>#}
+{#    <input name="text" id='text' placeholder="Client ID" >#}
+{#    <input type="hidden" name="btn_identifier" value="client_id_identifier" />#}
+{#    <input type="submit" >#}
+{#</form>#}
+{##}
+{#<button class="btn btn-danger" type="submit" name="delete" value="{{  item2  }}">#}

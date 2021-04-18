@@ -1,0 +1,15 @@
+{% extends 'layout.html' %}
+{% block content %}
+    <div>
+        <h2>{{ title }}</h2>
+        <p>Welcome {{ name }}!</p>
+        <p>This is the {{ title }}</p>
+        <p>{{ message }}</p>
+        <form method="POST" , action="{{ url_for('main_bp.map') }}">
+            <button type="submit" class="btn btn-primary">Confirm</button>
+            <form method="POST" , action="{{ url_for('main_bp.index') }}">
+                <button type="submit" class="btn btn-primary">Amend</button>
+            </form>
+        </form>
+    </div>
+{% endblock %}

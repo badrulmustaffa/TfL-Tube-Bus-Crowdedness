@@ -4,40 +4,6 @@ import plotly.express as px
 import json
 
 
-def CreateBorders(mean):
-    # Setting the json for appropriate mean and opening the file
-    json_file = '../data/TfL-Zone1-Area.json'  # change to jsonfilename
-    if 'Tube' in mean:
-        json_file = 'Tube.json'  # change to jsonfilename
-    with open(json_file) as jsonfile:
-        geojson = json.load(jsonfile)
-
-    # Create dataframe from dataset
-    data = pd.ExcelFile('data/multi-year-station-entry-and-exit-figures.xls')
-    data2 = pd.ExcelFile('data/London-borough.xls')
-    df = pd.read_excel(data, sheet_name='2017 Entry & Exit', skiprows=6)
-
-    # Creating dataframe for borough stations
-    boroughlist = pd.read_excel(data2, sheet_name='Borough').set_index("Borough")
-
-    df1 = df['Borough'].value_counts().reset_index(). \
-        rename(columns={'index': 'Borough', 'Borough': 'Frequency'}).set_index("Borough")
-    df1 = pd.concat([boroughlist, df1], axis=1).reset_index().fillna(0)
-
-    # Creating a cheropleth graph for borough
-    fig = px.choropleth_mapbox(df1, geojson=geojson, locations='Borough',
-                               color='Frequency', range_color=(0, 31),
-                               color_continuous_scale="Viridis",
-                               mapbox_style="carto-positron",
-                               featureidkey="properties.id",
-                               zoom=8.2, center={"lat": 51.5074, "lon": -0.1},
-                               width=600, opacity=0.6,
-                               title="TfL tube stations in 2017 based on Borough",
-                               labels={'Frequency': 'No. of station'})
-
-    return fig
-
-
 def tubeline():
     ''' Generating a list of tube stations for Dash Dropdown'''
     data2 = pd.ExcelFile('../data/London-borough.xls')
@@ -103,4 +69,49 @@ def createfigure(line):
                           }]
                       )
                       )
+    return fig
+
+
+def AreaList(mean):
+    ''' Generating a list of tube stations for Dash Dropdown'''
+    data = pd.ExcelFile('../data/Tube_and_Bus_Route_Stops.xls')
+    if 'Bus' in mean:
+        sheet = 'Bus Regions'
+    else:
+        sheet = 'Tube Regions'
+    area_list = pd.read_excel(data, sheet_name=sheet, skiprows=1)
+    return area_list
+
+def CreateBorders(mean):
+    # Setting the json for appropriate mean and opening the file
+    if 'Bus' in mean:
+        json_file = 'data/bus_region_map.json'
+    else:
+        json_file = 'data/tube_region_map.json'
+    with open(json_file) as jsonfile:
+        geojson = json.load(jsonfile)
+
+    # Create dataframe from dataset
+    data = pd.ExcelFile('')
+    data2 = pd.ExcelFile('data/London-borough.xls')
+    df = pd.read_excel(data, sheet_name='2017 Entry & Exit', skiprows=6)
+
+    # Creating dataframe for borough stations
+    boroughlist = pd.read_excel(data2, sheet_name='Borough').set_index("Borough")
+
+    df1 = df['Borough'].value_counts().reset_index(). \
+        rename(columns={'index': 'Borough', 'Borough': 'Frequency'}).set_index("Borough")
+    df1 = pd.concat([boroughlist, df1], axis=1).reset_index().fillna(0)
+
+    # Creating a cheropleth graph for borough
+    fig = px.choropleth_mapbox(df1, geojson=geojson, locations='Borough',
+                               color='Frequency', range_color=(0, 31),
+                               color_continuous_scale="Viridis",
+                               mapbox_style="carto-positron",
+                               featureidkey="properties.id",
+                               zoom=8.2, center={"lat": 51.5074, "lon": -0.1},
+                               width=600, opacity=0.6,
+                               title="TfL tube stations in 2017 based on Borough",
+                               labels={'Frequency': 'No. of station'})
+
     return fig

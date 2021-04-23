@@ -16,6 +16,9 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{{ url_for("forum_bp.index") }}">Forum</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/navigation_dash/">Dashboard</a>
+                </li>
 
                 {% if current_user.is_anonymous %}
                     <li class="nav-item">
@@ -35,10 +38,12 @@
             </ul>
             <form class="d-flex" action="{{ url_for("community_bp.display_profile") }}" method="post">
                 <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
-                <input class="form-control me-2" type="search" placeholder="Type in username" aria-label="Type in username"
-                    name="search_term">
+                <input class="form-control me-2" type="search" placeholder="Type in username"
+                       aria-label="Type in username"
+                       name="search_term">
                 <button class="btn btn-outline-success" type="submit">Search</button>
-            </form><br>
+            </form>
+            <br>
         </div>
     </div>
 </nav>

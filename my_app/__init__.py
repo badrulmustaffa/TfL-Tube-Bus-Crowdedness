@@ -29,13 +29,16 @@ def create_app(config_classname):
 
     # CSRFProtect extension conflicted with Dash, line below exclude Dash from CSRFProtect
     # (Adapted from https://stackoverflow.com/questions/51585596/dash-callbacks-not-working-if-dash-app-is-created-and-called-from-flask)
-    # csrf.exempt_views.add('dash.dash.dispatch')
+    csrf.exempt_views.add('dash.dash.dispatch')
 
     with app.app_context():
-
         # Import User
         from my_app.models import User, Profile
         db.create_all()
+
+        # Import Dash application
+        from dash_app.navigation_application import init_dashboard
+        app = init_dashboard(app)
 
     from my_app.main.routes import main_bp
     app.register_blueprint(main_bp)

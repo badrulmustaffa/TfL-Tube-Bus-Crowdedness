@@ -4,13 +4,8 @@
     {
       "type": "Feature",
       "properties": {
-        "stroke": "#555555",
-        "stroke-width": 2,
-        "stroke-opacity": 1,
-        "fill": "#555555",
-        "fill-opacity": 0.5,
-        "name": "Aldwych",
-        "index": 0
+        "index": 0,
+        "id": "Aldwych"
       },
       "geometry": {
         "type": "Polygon",
@@ -91,13 +86,8 @@
     {
       "type": "Feature",
       "properties": {
-        "stroke": "#555555",
-        "stroke-width": 2,
-        "stroke-opacity": 1,
-        "fill": "#555555",
-        "fill-opacity": 0.5,
-        "name": "Trafalgar Square",
-        "index": 1
+        "index": 1,
+        "id": "Trafalgar Square"
       },
       "geometry": {
         "type": "Polygon",
@@ -178,13 +168,8 @@
     {
       "type": "Feature",
       "properties": {
-        "stroke": "#555555",
-        "stroke-width": 2,
-        "stroke-opacity": 1,
-        "fill": "#555555",
-        "fill-opacity": 0.5,
-        "name": "Parliament Square",
-        "index": 2
+        "index": 2,
+        "id": "Parliament Square"
       },
       "geometry": {
         "type": "Polygon",
@@ -253,13 +238,8 @@
     {
       "type": "Feature",
       "properties": {
-        "stroke": "#555555",
-        "stroke-width": 2,
-        "stroke-opacity": 1,
-        "fill": "#555555",
-        "fill-opacity": 0.5,
-        "name": "Westminster Horseferry Road",
-        "index": 3
+        "index": 3,
+        "id": "Westminster Horseferry Road"
       },
       "geometry": {
         "type": "Polygon",
@@ -324,13 +304,8 @@
     {
       "type": "Feature",
       "properties": {
-        "stroke": "#555555",
-        "stroke-width": 2,
-        "stroke-opacity": 1,
-        "fill": "#555555",
-        "fill-opacity": 0.5,
-        "name": "Leicester Square",
-        "index": 4
+        "index": 4,
+        "id": "Leicester Square"
       },
       "geometry": {
         "type": "Polygon",
@@ -395,13 +370,8 @@
     {
       "type": "Feature",
       "properties": {
-        "stroke": "#555555",
-        "stroke-width": 2,
-        "stroke-opacity": 1,
-        "fill": "#555555",
-        "fill-opacity": 0.5,
-        "name": "Piccadilly Circus",
-        "index": 5
+        "index": 5,
+        "id": "Piccadilly Circus"
       },
       "geometry": {
         "type": "Polygon",
@@ -470,13 +440,8 @@
     {
       "type": "Feature",
       "properties": {
-        "stroke": "#555555",
-        "stroke-width": 2,
-        "stroke-opacity": 1,
-        "fill": "#555555",
-        "fill-opacity": 0.5,
-        "name": "Green Park",
-        "index": 6
+        "index": 6,
+        "id": "Green Park"
       },
       "geometry": {
         "type": "Polygon",
@@ -525,13 +490,8 @@
     {
       "type": "Feature",
       "properties": {
-        "stroke": "#555555",
-        "stroke-width": 2,
-        "stroke-opacity": 1,
-        "fill": "#555555",
-        "fill-opacity": 0.5,
-        "name": "Mayfair",
-        "index": 7
+        "index": 7,
+        "id": "Mayfair"
       },
       "geometry": {
         "type": "Polygon",
@@ -584,13 +544,8 @@
     {
       "type": "Feature",
       "properties": {
-        "stroke": "#555555",
-        "stroke-width": 2,
-        "stroke-opacity": 1,
-        "fill": "#555555",
-        "fill-opacity": 0.5,
-        "name": "Hyde Park Corner",
-        "index": 8
+        "index": 8,
+        "id": "Hyde Park Corner"
       },
       "geometry": {
         "type": "Polygon",
@@ -655,13 +610,8 @@
     {
       "type": "Feature",
       "properties": {
-        "stroke": "#555555",
-        "stroke-width": 2,
-        "stroke-opacity": 1,
-        "fill": "#555555",
-        "fill-opacity": 0.5,
-        "name": "Victoria",
-        "index": 9
+        "index": 9,
+        "id": "Victoria"
       },
       "geometry": {
         "type": "Polygon",
@@ -742,13 +692,8 @@
     {
       "type": "Feature",
       "properties": {
-        "stroke": "#555555",
-        "stroke-width": 2,
-        "stroke-opacity": 1,
-        "fill": "#555555",
-        "fill-opacity": 0.5,
-        "name": "Tottenham Court Road",
-        "index": 10
+        "index": 10,
+        "id": "Tottenham Court Road"
       },
       "geometry": {
         "type": "Polygon",
@@ -813,13 +758,8 @@
     {
       "type": "Feature",
       "properties": {
-        "stroke": "#555555",
-        "stroke-width": 2,
-        "stroke-opacity": 1,
-        "fill": "#555555",
-        "fill-opacity": 0.5,
-        "name": "Holborn",
-        "index": 11
+        "index": 11,
+        "id": "Holborn"
       },
       "geometry": {
         "type": "Polygon",
@@ -904,13 +844,8 @@
     {
       "type": "Feature",
       "properties": {
-        "stroke": "#555555",
-        "stroke-width": 2,
-        "stroke-opacity": 1,
-        "fill": "#555555",
-        "fill-opacity": 0.5,
-        "name": "Russell Square",
-        "index": 12
+        "index": 12,
+        "id": "Russell Square"
       },
       "geometry": {
         "type": "Polygon",
@@ -967,13 +902,8 @@
     {
       "type": "Feature",
       "properties": {
-        "stroke": "#555555",
-        "stroke-width": 2,
-        "stroke-opacity": 1,
-        "fill": "#555555",
-        "fill-opacity": 0.5,
-        "name": "Goodge Street",
-        "index": 13
+        "index": 13,
+        "id": "Goodge Street"
       },
       "geometry": {
         "type": "Polygon",
@@ -1022,13 +952,8 @@
     {
       "type": "Feature",
       "properties": {
-        "stroke": "#555555",
-        "stroke-width": 2,
-        "stroke-opacity": 1,
-        "fill": "#555555",
-        "fill-opacity": 0.5,
-        "name": "Warren Street",
-        "index": 14
+        "index": 14,
+        "id": "Warren Street"
       },
       "geometry": {
         "type": "Polygon",
@@ -1109,13 +1034,8 @@
     {
       "type": "Feature",
       "properties": {
-        "stroke": "#555555",
-        "stroke-width": 2,
-        "stroke-opacity": 1,
-        "fill": "#555555",
-        "fill-opacity": 0.5,
-        "name": "Euston",
-        "index": 15
+        "index": 15,
+        "id": "Euston"
       },
       "geometry": {
         "type": "Polygon",
@@ -1164,13 +1084,8 @@
     {
       "type": "Feature",
       "properties": {
-        "stroke": "#555555",
-        "stroke-width": 2,
-        "stroke-opacity": 1,
-        "fill": "#555555",
-        "fill-opacity": 0.5,
-        "name": "Oxford Circus",
-        "index": 16
+        "index": 16,
+        "id": "Oxford Circus"
       },
       "geometry": {
         "type": "Polygon",
@@ -1243,13 +1158,8 @@
     {
       "type": "Feature",
       "properties": {
-        "stroke": "#555555",
-        "stroke-width": 2,
-        "stroke-opacity": 1,
-        "fill": "#555555",
-        "fill-opacity": 0.5,
-        "name": "Great Portland Street",
-        "index": 17
+        "index": 17,
+        "id": "Great Portland Street"
       },
       "geometry": {
         "type": "Polygon",
@@ -1338,13 +1248,8 @@
     {
       "type": "Feature",
       "properties": {
-        "stroke": "#555555",
-        "stroke-width": 2,
-        "stroke-opacity": 1,
-        "fill": "#555555",
-        "fill-opacity": 0.5,
-        "name": "Baker Street",
-        "index": 18
+        "index": 18,
+        "id": "Baker Street"
       },
       "geometry": {
         "type": "Polygon",
@@ -1453,13 +1358,8 @@
     {
       "type": "Feature",
       "properties": {
-        "stroke": "#555555",
-        "stroke-width": 2,
-        "stroke-opacity": 1,
-        "fill": "#555555",
-        "fill-opacity": 0.5,
-        "name": "Bond Street",
-        "index": 19
+        "index": 19,
+        "id": "Bond Street"
       },
       "geometry": {
         "type": "Polygon",
@@ -1520,13 +1420,8 @@
     {
       "type": "Feature",
       "properties": {
-        "stroke": "#555555",
-        "stroke-width": 2,
-        "stroke-opacity": 1,
-        "fill": "#555555",
-        "fill-opacity": 0.5,
-        "name": "Marble Arch",
-        "index": 20
+        "index": 20,
+        "id": "Marble Arch"
       },
       "geometry": {
         "type": "Polygon",
@@ -1595,13 +1490,8 @@
     {
       "type": "Feature",
       "properties": {
-        "stroke": "#555555",
-        "stroke-width": 2,
-        "stroke-opacity": 1,
-        "fill": "#555555",
-        "fill-opacity": 0.5,
-        "name": "Edgware Road",
-        "index": 21
+        "index": 21,
+        "id": "Edgware Road"
       },
       "geometry": {
         "type": "Polygon",
@@ -1670,13 +1560,8 @@
     {
       "type": "Feature",
       "properties": {
-        "stroke": "#555555",
-        "stroke-width": 2,
-        "stroke-opacity": 1,
-        "fill": "#555555",
-        "fill-opacity": 0.5,
-        "name": "Paddington",
-        "index": 22
+        "index": 22,
+        "id": "Paddington"
       },
       "geometry": {
         "type": "Polygon",
@@ -1765,13 +1650,8 @@
     {
       "type": "Feature",
       "properties": {
-        "stroke": "#555555",
-        "stroke-width": 2,
-        "stroke-opacity": 1,
-        "fill": "#555555",
-        "fill-opacity": 0.5,
-        "name": "Lancaster Gate",
-        "index": 23
+        "index": 23,
+        "id": "Lancaster Gate"
       },
       "geometry": {
         "type": "Polygon",
@@ -1848,13 +1728,8 @@
     {
       "type": "Feature",
       "properties": {
-        "stroke": "#555555",
-        "stroke-width": 2,
-        "stroke-opacity": 1,
-        "fill": "#555555",
-        "fill-opacity": 0.5,
-        "name": "Bayswater",
-        "index": 24
+        "index": 24,
+        "id": "Bayswater"
       },
       "geometry": {
         "type": "Polygon",
@@ -1919,13 +1794,8 @@
     {
       "type": "Feature",
       "properties": {
-        "stroke": "#555555",
-        "stroke-width": 2,
-        "stroke-opacity": 1,
-        "fill": "#555555",
-        "fill-opacity": 0.5,
-        "name": "Notting Hill Gate",
-        "index": 25
+        "index": 25,
+        "id": "Notting Hill Gate"
       },
       "geometry": {
         "type": "Polygon",
@@ -2010,13 +1880,8 @@
     {
       "type": "Feature",
       "properties": {
-        "stroke": "#555555",
-        "stroke-width": 2,
-        "stroke-opacity": 1,
-        "fill": "#555555",
-        "fill-opacity": 0.5,
-        "name": "Royal Albert Hall",
-        "index": 26
+        "index": 26,
+        "id": "Royal Albert Hall"
       },
       "geometry": {
         "type": "Polygon",
@@ -2101,13 +1966,8 @@
     {
       "type": "Feature",
       "properties": {
-        "stroke": "#555555",
-        "stroke-width": 2,
-        "stroke-opacity": 1,
-        "fill": "#555555",
-        "fill-opacity": 0.5,
-        "name": "Knightsbridge",
-        "index": 27
+        "index": 27,
+        "id": "Knightsbridge"
       },
       "geometry": {
         "type": "Polygon",
@@ -2188,13 +2048,8 @@
     {
       "type": "Feature",
       "properties": {
-        "stroke": "#555555",
-        "stroke-width": 2,
-        "stroke-opacity": 1,
-        "fill": "#555555",
-        "fill-opacity": 0.5,
-        "name": "Pimlico",
-        "index": 28
+        "index": 28,
+        "id": "Pimlico"
       },
       "geometry": {
         "type": "Polygon",
@@ -2275,13 +2130,8 @@
     {
       "type": "Feature",
       "properties": {
-        "stroke": "#555555",
-        "stroke-width": 2,
-        "stroke-opacity": 1,
-        "fill": "#555555",
-        "fill-opacity": 0.5,
-        "name": "Victoria Coach Station",
-        "index": 29
+        "index": 29,
+        "id": "Victoria Coach Station"
       },
       "geometry": {
         "type": "Polygon",
@@ -2338,13 +2188,8 @@
     {
       "type": "Feature",
       "properties": {
-        "stroke": "#555555",
-        "stroke-width": 2,
-        "stroke-opacity": 1,
-        "fill": "#555555",
-        "fill-opacity": 0.5,
-        "name": "Chelsea Embankment",
-        "index": 30
+        "index": 30,
+        "id": "Chelsea Embankment"
       },
       "geometry": {
         "type": "Polygon",
@@ -2433,13 +2278,8 @@
     {
       "type": "Feature",
       "properties": {
-        "stroke": "#555555",
-        "stroke-width": 2,
-        "stroke-opacity": 1,
-        "fill": "#555555",
-        "fill-opacity": 0.5,
-        "name": "South Kensington",
-        "index": 31
+        "index": 31,
+        "id": "South Kensington"
       },
       "geometry": {
         "type": "Polygon",
@@ -2560,13 +2400,8 @@
     {
       "type": "Feature",
       "properties": {
-        "stroke": "#555555",
-        "stroke-width": 2,
-        "stroke-opacity": 1,
-        "fill": "#555555",
-        "fill-opacity": 0.5,
-        "name": "Sloane Square",
-        "index": 32
+        "index": 32,
+        "id": "Sloane Square"
       },
       "geometry": {
         "type": "Polygon",
@@ -2643,13 +2478,8 @@
     {
       "type": "Feature",
       "properties": {
-        "stroke": "#555555",
-        "stroke-width": 2,
-        "stroke-opacity": 1,
-        "fill": "#555555",
-        "fill-opacity": 0.5,
-        "name": "Chelsea King's Road",
-        "index": 33
+        "index": 33,
+        "id": "Chelsea King's Road"
       },
       "geometry": {
         "type": "Polygon",
@@ -2714,13 +2544,8 @@
     {
       "type": "Feature",
       "properties": {
-        "stroke": "#555555",
-        "stroke-width": 2,
-        "stroke-opacity": 1,
-        "fill": "#555555",
-        "fill-opacity": 0.5,
-        "name": "Gloucester Road",
-        "index": 34
+        "index": 34,
+        "id": "Gloucester Road"
       },
       "geometry": {
         "type": "Polygon",
@@ -2777,13 +2602,8 @@
     {
       "type": "Feature",
       "properties": {
-        "stroke": "#555555",
-        "stroke-width": 2,
-        "stroke-opacity": 1,
-        "fill": "#555555",
-        "fill-opacity": 0.5,
-        "name": "Kensington",
-        "index": 35
+        "index": 35,
+        "id": "Kensington"
       },
       "geometry": {
         "type": "Polygon",
@@ -2888,13 +2708,8 @@
     {
       "type": "Feature",
       "properties": {
-        "stroke": "#555555",
-        "stroke-width": 2,
-        "stroke-opacity": 1,
-        "fill": "#555555",
-        "fill-opacity": 0.5,
-        "name": "Earl's Court",
-        "index": 36
+        "index": 36,
+        "id": "Earl's Court"
       },
       "geometry": {
         "type": "Polygon",
@@ -2975,13 +2790,8 @@
     {
       "type": "Feature",
       "properties": {
-        "stroke": "#555555",
-        "stroke-width": 2,
-        "stroke-opacity": 1,
-        "fill": "#555555",
-        "fill-opacity": 0.5,
-        "name": "King's Cross St. Pancras",
-        "index": 37
+        "index": 37,
+        "id": "King's Cross St. Pancras"
       },
       "geometry": {
         "type": "Polygon",
@@ -3078,13 +2888,8 @@
     {
       "type": "Feature",
       "properties": {
-        "stroke": "#555555",
-        "stroke-width": 2,
-        "stroke-opacity": 1,
-        "fill": "#555555",
-        "fill-opacity": 0.5,
-        "name": "Angel Islington",
-        "index": 38
+        "index": 38,
+        "id": "Angel Islington"
       },
       "geometry": {
         "type": "Polygon",
@@ -3185,13 +2990,8 @@
     {
       "type": "Feature",
       "properties": {
-        "stroke": "#555555",
-        "stroke-width": 2,
-        "stroke-opacity": 1,
-        "fill": "#555555",
-        "fill-opacity": 0.5,
-        "name": "Waterloo",
-        "index": 39
+        "index": 39,
+        "id": "Waterloo"
       },
       "geometry": {
         "type": "Polygon",
@@ -3276,13 +3076,8 @@
     {
       "type": "Feature",
       "properties": {
-        "stroke": "#555555",
-        "stroke-width": 2,
-        "stroke-opacity": 1,
-        "fill": "#555555",
-        "fill-opacity": 0.5,
-        "name": "Southwark",
-        "index": 40
+        "index": 40,
+        "id": "Southwark"
       },
       "geometry": {
         "type": "Polygon",
@@ -3351,13 +3146,8 @@
     {
       "type": "Feature",
       "properties": {
-        "stroke": "#555555",
-        "stroke-width": 2,
-        "stroke-opacity": 1,
-        "fill": "#555555",
-        "fill-opacity": 0.5,
-        "name": "London Bridge",
-        "index": 41
+        "index": 41,
+        "id": "London Bridge"
       },
       "geometry": {
         "type": "Polygon",
@@ -3422,13 +3212,8 @@
     {
       "type": "Feature",
       "properties": {
-        "stroke": "#555555",
-        "stroke-width": 2,
-        "stroke-opacity": 1,
-        "fill": "#555555",
-        "fill-opacity": 0.5,
-        "name": "Old Street",
-        "index": 42
+        "index": 42,
+        "id": "Old Street"
       },
       "geometry": {
         "type": "Polygon",
@@ -3505,13 +3290,8 @@
     {
       "type": "Feature",
       "properties": {
-        "stroke": "#555555",
-        "stroke-width": 2,
-        "stroke-opacity": 1,
-        "fill": "#555555",
-        "fill-opacity": 0.5,
-        "name": "Hoxton",
-        "index": 43
+        "index": 43,
+        "id": "Hoxton"
       },
       "geometry": {
         "type": "Polygon",
@@ -3584,13 +3364,8 @@
     {
       "type": "Feature",
       "properties": {
-        "stroke": "#555555",
-        "stroke-width": 2,
-        "stroke-opacity": 1,
-        "fill": "#555555",
-        "fill-opacity": 0.5,
-        "name": "Shoreditch",
-        "index": 44
+        "index": 44,
+        "id": "Shoreditch"
       },
       "geometry": {
         "type": "Polygon",
@@ -3691,13 +3466,8 @@
     {
       "type": "Feature",
       "properties": {
-        "stroke": "#555555",
-        "stroke-width": 2,
-        "stroke-opacity": 1,
-        "fill": "#555555",
-        "fill-opacity": 0.5,
-        "name": "Liverpool Street",
-        "index": 45
+        "index": 45,
+        "id": "Liverpool Street"
       },
       "geometry": {
         "type": "Polygon",
@@ -3782,13 +3552,8 @@
     {
       "type": "Feature",
       "properties": {
-        "stroke": "#555555",
-        "stroke-width": 2,
-        "stroke-opacity": 1,
-        "fill": "#555555",
-        "fill-opacity": 0.5,
-        "name": "Moorgate",
-        "index": 46
+        "index": 46,
+        "id": "Moorgate"
       },
       "geometry": {
         "type": "Polygon",
@@ -3861,13 +3626,8 @@
     {
       "type": "Feature",
       "properties": {
-        "stroke": "#555555",
-        "stroke-width": 2,
-        "stroke-opacity": 1,
-        "fill": "#555555",
-        "fill-opacity": 0.5,
-        "name": "Barbican",
-        "index": 47
+        "index": 47,
+        "id": "Barbican"
       },
       "geometry": {
         "type": "Polygon",
@@ -3956,13 +3716,8 @@
     {
       "type": "Feature",
       "properties": {
-        "stroke": "#555555",
-        "stroke-width": 2,
-        "stroke-opacity": 1,
-        "fill": "#555555",
-        "fill-opacity": 0.5,
-        "name": "St. Paul's",
-        "index": 48
+        "index": 48,
+        "id": "St. Paul's"
       },
       "geometry": {
         "type": "Polygon",
@@ -4051,13 +3806,8 @@
     {
       "type": "Feature",
       "properties": {
-        "stroke": "#555555",
-        "stroke-width": 2,
-        "stroke-opacity": 1,
-        "fill": "#555555",
-        "fill-opacity": 0.5,
-        "name": "Blackfriars",
-        "index": 49
+        "index": 49,
+        "id": "Blackfriars"
       },
       "geometry": {
         "type": "Polygon",
@@ -4090,13 +3840,8 @@
     {
       "type": "Feature",
       "properties": {
-        "stroke": "#555555",
-        "stroke-width": 2,
-        "stroke-opacity": 1,
-        "fill": "#555555",
-        "fill-opacity": 0.5,
-        "name": "City Thameslink",
-        "index": 50
+        "index": 50,
+        "id": "City Thameslink"
       },
       "geometry": {
         "type": "Polygon",
@@ -4181,13 +3926,8 @@
     {
       "type": "Feature",
       "properties": {
-        "stroke": "#555555",
-        "stroke-width": 2,
-        "stroke-opacity": 1,
-        "fill": "#555555",
-        "fill-opacity": 0.5,
-        "name": "Chancery Lane",
-        "index": 51
+        "index": 51,
+        "id": "Chancery Lane"
       },
       "geometry": {
         "type": "Polygon",
@@ -4252,13 +3992,8 @@
     {
       "type": "Feature",
       "properties": {
-        "stroke": "#555555",
-        "stroke-width": 2,
-        "stroke-opacity": 1,
-        "fill": "#555555",
-        "fill-opacity": 0.5,
-        "name": "Gray's Inn Road",
-        "index": 52
+        "index": 52,
+        "id": "Gray's Inn Road"
       },
       "geometry": {
         "type": "Polygon",
@@ -4311,13 +4046,8 @@
     {
       "type": "Feature",
       "properties": {
-        "stroke": "#555555",
-        "stroke-width": 2,
-        "stroke-opacity": 1,
-        "fill": "#555555",
-        "fill-opacity": 0.5,
-        "name": "Farringdon",
-        "index": 53
+        "index": 53,
+        "id": "Farringdon"
       },
       "geometry": {
         "type": "Polygon",
@@ -4390,13 +4120,8 @@
     {
       "type": "Feature",
       "properties": {
-        "stroke": "#555555",
-        "stroke-width": 2,
-        "stroke-opacity": 1,
-        "fill": "#555555",
-        "fill-opacity": 0.5,
-        "name": "Clerkenwell",
-        "index": 54
+        "index": 54,
+        "id": "Clerkenwell"
       },
       "geometry": {
         "type": "Polygon",
@@ -4489,13 +4214,8 @@
     {
       "type": "Feature",
       "properties": {
-        "stroke": "#555555",
-        "stroke-width": 2,
-        "stroke-opacity": 1,
-        "fill": "#555555",
-        "fill-opacity": 0.5,
-        "name": "Aldgate",
-        "index": 55
+        "index": 55,
+        "id": "Aldgate"
       },
       "geometry": {
         "type": "Polygon",
@@ -4588,13 +4308,8 @@
     {
       "type": "Feature",
       "properties": {
-        "stroke": "#555555",
-        "stroke-width": 2,
-        "stroke-opacity": 1,
-        "fill": "#555555",
-        "fill-opacity": 0.5,
-        "name": "Aldgate East",
-        "index": 56
+        "index": 56,
+        "id": "Aldgate East"
       },
       "geometry": {
         "type": "Polygon",
@@ -4671,13 +4386,8 @@
     {
       "type": "Feature",
       "properties": {
-        "stroke": "#555555",
-        "stroke-width": 2,
-        "stroke-opacity": 1,
-        "fill": "#555555",
-        "fill-opacity": 0.5,
-        "name": "Tower Hill",
-        "index": 57
+        "index": 57,
+        "id": "Tower Hill"
       },
       "geometry": {
         "type": "Polygon",
@@ -4758,13 +4468,8 @@
     {
       "type": "Feature",
       "properties": {
-        "stroke": "#555555",
-        "stroke-width": 2,
-        "stroke-opacity": 1,
-        "fill": "#555555",
-        "fill-opacity": 0.5,
-        "name": "Mansion House",
-        "index": 58
+        "index": 58,
+        "id": "Mansion House"
       },
       "geometry": {
         "type": "Polygon",
@@ -4817,13 +4522,8 @@
     {
       "type": "Feature",
       "properties": {
-        "stroke": "#555555",
-        "stroke-width": 2,
-        "stroke-opacity": 1,
-        "fill": "#555555",
-        "fill-opacity": 0.5,
-        "name": "Bank",
-        "index": 59
+        "index": 59,
+        "id": "Bank"
       },
       "geometry": {
         "type": "Polygon",
@@ -4896,13 +4596,8 @@
     {
       "type": "Feature",
       "properties": {
-        "stroke": "#555555",
-        "stroke-width": 2,
-        "stroke-opacity": 1,
-        "fill": "#555555",
-        "fill-opacity": 0.5,
-        "name": "Monument",
-        "index": 60
+        "index": 60,
+        "id": "Monument"
       },
       "geometry": {
         "type": "Polygon",
@@ -4991,13 +4686,8 @@
     {
       "type": "Feature",
       "properties": {
-        "stroke": "#555555",
-        "stroke-width": 2,
-        "stroke-opacity": 1,
-        "fill": "#555555",
-        "fill-opacity": 0.5,
-        "name": "City Hall",
-        "index": 61
+        "index": 61,
+        "id": "City Hall"
       },
       "geometry": {
         "type": "Polygon",
@@ -5082,13 +4772,8 @@
     {
       "type": "Feature",
       "properties": {
-        "stroke": "#555555",
-        "stroke-width": 2,
-        "stroke-opacity": 1,
-        "fill": "#555555",
-        "fill-opacity": 0.5,
-        "name": "Borough",
-        "index": 62
+        "index": 62,
+        "id": "Borough"
       },
       "geometry": {
         "type": "Polygon",
@@ -5157,13 +4842,8 @@
     {
       "type": "Feature",
       "properties": {
-        "stroke": "#555555",
-        "stroke-width": 2,
-        "stroke-opacity": 1,
-        "fill": "#555555",
-        "fill-opacity": 0.5,
-        "name": "St. George's Circus",
-        "index": 63
+        "index": 63,
+        "id": "St. George's Circus"
       },
       "geometry": {
         "type": "Polygon",
@@ -5240,13 +4920,8 @@
     {
       "type": "Feature",
       "properties": {
-        "stroke": "#555555",
-        "stroke-width": 2,
-        "stroke-opacity": 1,
-        "fill": "#555555",
-        "fill-opacity": 0.5,
-        "name": "Vauxhall",
-        "index": 64
+        "index": 64,
+        "id": "Vauxhall"
       },
       "geometry": {
         "type": "Polygon",
@@ -5319,13 +4994,8 @@
     {
       "type": "Feature",
       "properties": {
-        "stroke": "#555555",
-        "stroke-width": 2,
-        "stroke-opacity": 1,
-        "fill": "#555555",
-        "fill-opacity": 0.5,
-        "name": "Lambeth Palace",
-        "index": 65
+        "index": 65,
+        "id": "Lambeth Palace"
       },
       "geometry": {
         "type": "Polygon",
@@ -5402,13 +5072,8 @@
     {
       "type": "Feature",
       "properties": {
-        "stroke": "#555555",
-        "stroke-width": 2,
-        "stroke-opacity": 1,
-        "fill": "#555555",
-        "fill-opacity": 0.5,
-        "name": "Lambeth North",
-        "index": 66
+        "index": 66,
+        "id": "Lambeth North"
       },
       "geometry": {
         "type": "Polygon",
@@ -5477,13 +5142,8 @@
     {
       "type": "Feature",
       "properties": {
-        "stroke": "#555555",
-        "stroke-width": 2,
-        "stroke-opacity": 1,
-        "fill": "#555555",
-        "fill-opacity": 0.5,
-        "name": "Elephant & Castle",
-        "index": 67
+        "index": 67,
+        "id": "Elephant & Castle"
       },
       "geometry": {
         "type": "Polygon",

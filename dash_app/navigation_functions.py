@@ -1,4 +1,5 @@
 import pandas as pd
+import numpy as np
 import plotly.graph_objects as go
 import plotly.express as px
 import json
@@ -82,36 +83,51 @@ def AreaList(mean):
     area_list = pd.read_excel(data, sheet_name=sheet, skiprows=1)
     return area_list
 
-def CreateBorders(mean):
+
+def CreateBorders(mean, start, end):
     # Setting the json for appropriate mean and opening the file
     if 'Bus' in mean:
-        json_file = 'data/bus_region_map.json'
+        json_file = '../data/bus_region_map.json'
     else:
-        json_file = 'data/tube_region_map.json'
+        json_file = '../data/tube_region_map.json'
     with open(json_file) as jsonfile:
         geojson = json.load(jsonfile)
 
+    mapbox_access_token = "pk.eyJ1IjoiYmFkcnVsbXVzdGFmZmEiLCJhIjoiY2ttMzE1cXgzNGJ0dzJ1bnc0Z3hkZnBpbSJ9." \
+                          "GEDuGnidtzWvTiXPCGIX4w"
+
+    if start is None:
+        start = ''
+
+    if end is None:
+        end = ''
+
     # Create dataframe from dataset
-    data = pd.ExcelFile('')
-    data2 = pd.ExcelFile('data/London-borough.xls')
-    df = pd.read_excel(data, sheet_name='2017 Entry & Exit', skiprows=6)
+    df = AreaList(mean)[{'Name'}].set_index('Name')
+    df["Status"] = np.nan
+    df.loc[start, 'Status'] = 'Start'
+    df.loc[end, 'Status'] = 'End'
+    df = df.reset_index().dropna()
 
-    # Creating dataframe for borough stations
-    boroughlist = pd.read_excel(data2, sheet_name='Borough').set_index("Borough")
-
-    df1 = df['Borough'].value_counts().reset_index(). \
-        rename(columns={'index': 'Borough', 'Borough': 'Frequency'}).set_index("Borough")
-    df1 = pd.concat([boroughlist, df1], axis=1).reset_index().fillna(0)
-
-    # Creating a cheropleth graph for borough
-    fig = px.choropleth_mapbox(df1, geojson=geojson, locations='Borough',
-                               color='Frequency', range_color=(0, 31),
-                               color_continuous_scale="Viridis",
+    fig = px.choropleth_mapbox(df, geojson=geojson, locations='Name',
+                               color='Status',
+                               color_discrete_map={'Start': 'blue', 'End': 'red'},
                                mapbox_style="carto-positron",
                                featureidkey="properties.id",
-                               zoom=8.2, center={"lat": 51.5074, "lon": -0.1},
-                               width=600, opacity=0.6,
-                               title="TfL tube stations in 2017 based on Borough",
-                               labels={'Frequency': 'No. of station'})
+                               opacity=1,
+                               labels={'Status': 'Legend'})
 
+    fig.update_layout(margin={"r": 0, "t": 0, "l": 0, "b": 10},
+                      autosize=True,
+                      showlegend=True,
+                      mapbox=go.layout.Mapbox(
+                          dict(accesstoken=mapbox_access_token),
+                          zoom=11, center={"lat": 51.5087, "lon": -0.1346},
+                          layers=[{
+                              'sourcetype': 'geojson',
+                              'source': geojson,
+                              'type': 'line',
+                          }]
+                      )
+                      )
     return fig

@@ -119,7 +119,7 @@ def CreateBorders(mean, start, end):
 
     fig.update_layout(margin={"r": 0, "t": 0, "l": 0, "b": 10},
                       autosize=True,
-                      showlegend=True,
+                      showlegend=False,
                       mapbox=go.layout.Mapbox(
                           dict(accesstoken=mapbox_access_token),
                           zoom=11, center={"lat": 51.5087, "lon": -0.1346},

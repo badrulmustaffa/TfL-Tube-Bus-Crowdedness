@@ -40,12 +40,12 @@ def init_dashboard(flask_app):
                                                ),
 
                                     html.Br(),
-                                    html.Label(['Start area:',
+                                    html.Label([dbc.Badge("Start area:", pill=True, color="primary"),
                                                 dcc.Dropdown(id='start_select', placeholder='Search area', value=None)],
                                                style={'width': '100%', 'display': 'inline-block'}),
 
                                     html.Br(),
-                                    html.Label(['Destination:',
+                                    html.Label([dbc.Badge("Destination:", pill=True, color="danger"),
                                                 dcc.Dropdown(id='end_select', placeholder='Search area', value=None)],
                                                style={'width': '100%', 'display': 'inline-block'}),
 

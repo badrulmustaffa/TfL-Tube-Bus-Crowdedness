@@ -41,7 +41,7 @@ def nav_buttons():
                                                        placeholder="Type in username",
                                                        name="search_term"),
                                              html.Button(className="btn btn-outline-success", type="submit",
-                                                         style={'margin-left': 9}, children="Search")
+                                                         style={'margin-left': 8}, children="Search")
 
                                          ])
                            ])

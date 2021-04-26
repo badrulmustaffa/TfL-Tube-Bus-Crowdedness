@@ -39,6 +39,16 @@ def init_dashboard(flask_app):
                                                style={'width': '100%', 'display': 'inline-block'}
                                                ),
 
+                                    # html.Label(['Transportation mode:',
+                                    #             dbc.Button("BUS", id="bus_select", color="success", outline=False),
+                                    #             dbc.Button("TUBE", id="tube_select", color="success", outline=True),
+                                    #             dcc.Dropdown(id='mean_select',
+                                    #                          options=[{"label": x, "value": x} for x in
+                                    #                                   ['Bus', 'Tube']],
+                                    #                          value='Bus')],
+                                    #            style={'width': '100%', 'display': 'inline-block'}
+                                    #            ),
+
                                     html.Br(),
                                     html.Label([dbc.Badge("Start area:", pill=True, color="primary"),
                                                 dcc.Dropdown(id='start_select', placeholder='Search area', value=None)],
@@ -49,7 +59,7 @@ def init_dashboard(flask_app):
                                                 dcc.Dropdown(id='end_select', placeholder='Search area', value=None)],
                                                style={'width': '100%', 'display': 'inline-block'}),
 
-                                    html.Br(), html.Br(),
+                                    html.Br(),
                                     html.Div(children=[
                                         dbc.Button("Clear", id="clear_button", color="primary", className="mr-2"),
                                         dbc.Button("Go", id="go_button", color="primary", className="mr-2")
@@ -86,10 +96,54 @@ def init_callback(app):
         drop = [{"label": x, "value": x} for x in AreaList(mean_select)['Name']]
         return drop, drop
 
-    @app.callback(Output("line_figure", "children"),
+    @app.callback([Output("line_figure", "children")],
                   [Input("mean_select", "value"),
                    Input("start_select", "value"),
                    Input("end_select", "value")])
     def render_figure(mean_select, start_select, end_select):
         fig = CreateBorders(mean_select, start_select, end_select)
         return dcc.Graph(figure=fig)
+
+    # @app.callback([Output("start_select", "options"),
+    #                Output("end_select", "options"),
+    #                Output("bus_select", "n_clicks"),
+    #                Output("tube_select", "n_clicks"),
+    #                Output("bus_select", "outline"),
+    #                Output("tube_select", "outline"),
+    #                ],
+    #               [Input("bus_select", "n_clicks"),
+    #                Input("tube_select", "n_clicks"),
+    #                Input("bus_select", "outline"),
+    #                Input("tube_select", "outline")
+    #                ])
+    # def mean_selection(bus_n_click, tube_n_click, bus_clicked, tube_clicked):
+    #     mean_select = 'Bus'
+    #     if bus_n_click is not None:
+    #         mean_select = 'Bus'
+    #         bus_clicked = False
+    #         tube_clicked = True
+    #         bus_n_click = None
+    #
+    #     elif tube_n_click is not None:
+    #         mean_select = 'Tube'
+    #         tube_clicked = False
+    #         bus_clicked = True
+    #         tube_n_click = None
+    #
+    #     drop = [{"label": x, "value": x} for x in AreaList(mean_select)['Name']]
+    #     return drop, drop, bus_n_click, tube_n_click, bus_clicked, tube_clicked
+    #
+    # @app.callback([Output("line_figure", "children")],
+    #               [  # Input("mean_select", "value"),
+    #                   Input("bus_select", "outline"),
+    #                   Input("tube_select", "outline"),
+    #                   Input("start_select", "value"),
+    #                   Input("end_select", "value")])
+    # def render_figure(bus_clicked, tube_clicked, start_select, end_select):
+    #     mean_select = 'Bus'
+    #     if not bus_clicked:
+    #         mean_select = 'Bus'
+    #     if not tube_clicked:
+    #         mean_select = 'Tube'
+    #     fig = CreateBorders(mean_select, start_select, end_select)
+    #     return dcc.Graph(figure=fig)

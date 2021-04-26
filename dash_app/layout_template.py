@@ -10,8 +10,8 @@ def logo():
     return encoded_image
 
 
-def navbar():
-    nav_buttons = html.Div(className="collapse navbar-collapse", id="navbarNav",
+def nav_buttons():
+    nav_buttons = html.Div(className="navbar-collapse",
                            children=[
                                html.Ul(className="navbar-nav", children=[
                                    html.Li(className="nav-item", children=[
@@ -45,24 +45,25 @@ def navbar():
 
                                          ])
                            ])
+    return nav_buttons
 
-    navbar = html.Nav(className="navbar navbar-expand-lg navbar-light bg-light",
-                      children=[
-                          html.Div(className="container-fluid", children=[
-                              html.Img(src='data:image/png;base64,{}'.format(logo().decode()),
-                                       width=50, style={'margin-right': 10, 'margin-left': -19},
-                                       className='img-thumbnail'),
-                              html.A(dbc.NavbarBrand("Sander Squad", href="/", external_link=True)),
-                              # html.Button(className="navbar-toggler", type="button",
-                              #             children=[html.Span(className="navbar-toggler-icon"),
-                              #                       dbc.Collapse(nav_buttons, id="navbar-collapse", navbar=True)
-                              #                       ]),
-                              dbc.NavbarToggler(id="navbar-toggler"),
-                              dbc.Collapse(id="navbar-collapse", navbar=True, is_open=False, children=nav_buttons),
-                          ]),
-                      ])
 
-    return navbar
+# def navbar():
+#     return html.Nav(className="navbar navbar-expand-lg navbar-light bg-light",
+#                     children=[
+#                         html.Div(className="container-fluid", children=[
+#                             html.Img(src='data:image/png;base64,{}'.format(logo().decode()),
+#                                      width=50, style={'margin-right': 10, 'margin-left': -19},
+#                                      className='img-thumbnail'),
+#                             html.A(dbc.NavbarBrand("Sander Squad", href="/", external_link=True)),
+#                             # html.Button(className="navbar-toggler", type="button",
+#                             #             children=[html.Span(className="navbar-toggler-icon"),
+#                             #                       dbc.Collapse(nav_buttons, id="navbar-collapse", navbar=True)
+#                             #                       ]),
+#                             dbc.NavbarToggler(id="navbar-toggler"),
+#                             dbc.Collapse(id="navbar-collapse", navbar=True, is_open=False, children=nav_buttons()),
+#                         ]),
+#                     ])
 
     # # add callback for toggling the collapse on small screens
     # @app.callback(Output("navbar-collapse", "is_open"),

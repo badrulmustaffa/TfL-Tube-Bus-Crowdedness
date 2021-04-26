@@ -5,10 +5,11 @@ import dash_bootstrap_components as dbc
 import dash_core_components as dcc
 from dash.dependencies import Output, Input, State
 
-from dash_app.layout_template import navbar
+from dash_app.layout_template import nav_buttons, logo
 from dash_app.navigation_functions import AreaList, CreateBorders
 
 FA = "https://use.fontawesome.com/releases/v5.12.1/css/all.css"
+
 
 def init_dashboard(flask_app):
     """Create a Plotly Dash dashboard"""
@@ -18,7 +19,18 @@ def init_dashboard(flask_app):
 
     ## Creating the app layout
     dash_app.layout = html.Div(children=[
-        html.Header(navbar()),
+        html.Header(dbc.Navbar(className="navbar", expand='lg', light=True, color='light',
+                               children=[html.Div(className="container-fluid", children=[
+                                       html.Img(src='data:image/png;base64,{}'.format(logo().decode()),
+                                                width=50, style={'margin-right': 10, 'margin-left': -19},
+                                                className='img-thumbnail'),
+                                       html.A(dbc.NavbarBrand("Sander Squad", href="/", external_link=True)),
+                                       dbc.NavbarToggler(id="navbar-toggler"),
+                                       dbc.Collapse([nav_buttons()], id="navbar-collapse", navbar=True),
+                                   ]),
+                               ])
+                    ),
+
         dbc.Container(fluid=True, children=[
             # First row
             dbc.Row([
@@ -38,17 +50,17 @@ def init_dashboard(flask_app):
                                          dbc.Button([html.I(className="fas fa-subway mr-2"), "TRAIN"]
                                                     , id="tube_select", color="success", outline=True)],
                                         header="Transportation mode:",
-                                        ),
+                                    ),
 
                                     dbc.Toast(
                                         [dcc.Dropdown(id='start_select', placeholder='Search area', value=None)],
                                         header="Start area:",
-                                        icon="primary",),
+                                        icon="primary", ),
 
                                     dbc.Toast(
                                         [dcc.Dropdown(id='end_select', placeholder='Search area', value=None)],
                                         header="Destination:",
-                                        icon="danger",),
+                                        icon="danger", ),
 
                                     html.Div(children=[
                                         dbc.Button("Clear", id="clear_button", color="primary", className="mr-2"),
@@ -64,7 +76,7 @@ def init_dashboard(flask_app):
                     dbc.Card(children=[dbc.FormGroup([
                         dbc.Container(id="line_figure", fluid=True, style={'display': 'inline-block', 'width': '100%'})
                     ])
-                    ])
+                    ]),
                 ]),
             ])
 
@@ -79,6 +91,24 @@ def init_dashboard(flask_app):
 
 ## Create callback for changing line from dropdown
 def init_callback(app):
+    @app.callback(
+        Output("collapse", "is_open"),
+        [Input("collapse-button", "n_clicks")],
+        [State("collapse", "is_open")],
+    )
+    def toggle_collapse(n, is_open):
+        if n:
+            return not is_open
+        return is_open
+
+    @app.callback(Output("navbar-collapse", "is_open"),
+                  [Input("navbar-toggler", "n_clicks")],
+                  [State("navbar-collapse", "is_open")], )
+    def toggle_navbar_collapse(n, is_open):
+        if n:
+            return not is_open
+        return is_open
+
     @app.callback([Output("start_select", "options"),
                    Output("end_select", "options"),
                    Output("bus_select", "n_clicks"),
@@ -86,11 +116,9 @@ def init_callback(app):
                    Output("bus_select", "outline"),
                    Output("tube_select", "outline"),
                    Output("bus_select", "active"),
-                   Output("tube_select", "active"),
-                   ],
+                   Output("tube_select", "active")],
                   [Input("bus_select", "n_clicks"),
-                   Input("tube_select", "n_clicks"),
-                   ])
+                   Input("tube_select", "n_clicks")])
     def mean_selection(bus_n_clicks, tube_n_clicks):
         mean_select = 'Bus'
         bus_clicked = False

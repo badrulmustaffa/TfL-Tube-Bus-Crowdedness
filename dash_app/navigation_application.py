@@ -42,7 +42,6 @@ def init_dashboard(flask_app):
                             fluid=True, children=[
                                 dbc.FormGroup([
                                     html.Br(),
-
                                     dbc.Toast(
                                         [dbc.Button([html.I(className="fas fa-bus mr-2"), "BUS"]
                                                     , id="bus_select", color="success", outline=False,

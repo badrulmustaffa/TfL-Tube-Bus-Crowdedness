@@ -23,7 +23,7 @@ def init_dashboard(flask_app):
                                   dbc.Input(id='search_input', className="me-2",
                                             placeholder="Type in username"),
                                   dbc.Button("Search", id="search_button", color='success', outline=True,
-                                             external_link=True, type='button',
+                                             external_link=True, type='submit',
                                              style={'margin-left': 8})])
 
     nav_buttons = html.Div(className="navbar-collapse",

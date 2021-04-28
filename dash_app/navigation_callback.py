@@ -14,18 +14,18 @@ def init_callback(app):
                   [Input("page_content", "id")])
     def load_navbar(input):
         """ Display navigations based on current user"""
-        name = 'Welcome, traveler!'
+        name = 'traveler'
         third_nav = 'Login'
         third_link = '/login'
         forth_nav = 'Sign up'
         forth_link = '/signup'
         if not current_user.is_anonymous:
-            name = 'Welcome, {}!'.format(current_user.username)
+            name = current_user.username
             third_nav = 'My profile'
             third_link = '/community/view_profile'
             forth_nav = 'Logout'
             forth_link = '/logout'
-        return name, third_nav, third_link, forth_nav, forth_link
+        return 'Welcome, {}!'.format(name), third_nav, third_link, forth_nav, forth_link
 
     @app.callback(Output("navbar-collapse", "is_open"),
                   [Input("navbar-toggler", "n_clicks")],

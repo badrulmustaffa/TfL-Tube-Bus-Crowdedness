@@ -1,8 +1,6 @@
 import base64
-import dash_core_components as dcc
 import dash_bootstrap_components as dbc
 import dash_html_components as html
-from flask_login import current_user
 
 
 def logo():
@@ -11,7 +9,16 @@ def logo():
     return encoded_image
 
 
-def nav_buttons(search_button):
+def nav_buttons():
+    """ return the navbar based on the current user status"""
+    search_button = html.Form(className="d-flex", id="search_form",
+                              children=[
+                                  dbc.Input(id='search_input', className="me-2",
+                                            placeholder="Type in username"),
+                                  dbc.Button("Search", id="search_button", color='success', outline=True,
+                                             external_link=True, type='submit',
+                                             style={'margin-left': 8})])
+
     nav_buttons = html.Div(className="navbar-collapse",
                            children=[
                                html.Ul(className="navbar-nav", children=[
@@ -24,31 +31,28 @@ def nav_buttons(search_button):
                                               children="Forum")
                                    ]),
                                    html.Li(className="nav-item", children=[
-                                       html.A(className="nav-link", href="/community/view_profile",
-                                              children="My profile")
+                                       html.A(className="nav-link", id="third_nav")
                                    ]),
                                    html.Li(className="nav-item", children=[
-                                       html.A(className="nav-link", href="/logout",
-                                              children="Logout")
+                                       html.A(className="nav-link", id="forth_nav")
                                    ]),
                                ]),
                                search_button
                            ])
-    return nav_buttons
 
-# def navbar():
-#     return html.Nav(className="navbar navbar-expand-lg navbar-light bg-light",
-#                     children=[
-#                         html.Div(className="container-fluid", children=[
-#                             html.Img(src='data:image/png;base64,{}'.format(logo().decode()),
-#                                      width=50, style={'margin-right': 10, 'margin-left': -19},
-#                                      className='img-thumbnail'),
-#                             html.A(dbc.NavbarBrand("Sander Squad", href="/", external_link=True)),
-#                             # html.Button(className="navbar-toggler", type="button",
-#                             #             children=[html.Span(className="navbar-toggler-icon"),
-#                             #                       dbc.Collapse(nav_buttons, id="navbar-collapse", navbar=True)
-#                             #                       ]),
-#                             dbc.NavbarToggler(id="navbar-toggler"),
-#                             dbc.Collapse(id="navbar-collapse", navbar=True, is_open=False, children=nav_buttons()),
-#                         ]),
-#                     ])
+    full_navbar = dbc.Navbar(className="navbar", expand='lg', light=True, color='light',
+                             children=[html.Div(className="container-fluid", children=[
+                                 html.Img(
+                                     src='data:image/png;base64,{}'.format(logo().decode()),
+                                     width=50,
+                                     style={'margin-right': 10, 'margin-left': -19},
+                                     className='img-thumbnail'),
+                                 html.A(dbc.NavbarBrand("Sander Squad", href="/",
+                                                        external_link=True)),
+                                 dbc.NavbarToggler(id="navbar-toggler"),
+                                 dbc.Collapse(id="navbar-collapse", navbar=True,
+                                              children=[nav_buttons]
+                                              ),
+                             ]),
+                                       ])
+    return full_navbar

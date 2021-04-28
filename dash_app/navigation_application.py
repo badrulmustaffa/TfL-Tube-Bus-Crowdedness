@@ -5,7 +5,7 @@ import dash_bootstrap_components as dbc
 import dash_core_components as dcc
 from flask_login import current_user
 from dash.dependencies import Output, Input, State
-from dash_app.layout_template import logo
+from dash_app.layout_template import logo, nav_buttons
 from dash_app.navigation_callback import init_callback
 from dash_app.navigation_functions import AreaList, CreateBorders
 
@@ -18,54 +18,9 @@ def init_dashboard(flask_app):
                          routes_pathname_prefix="/navigation_dash/",
                          external_stylesheets=[dbc.themes.BOOTSTRAP, FA])
 
-    search_button = html.Form(className="d-flex", id="search_form",
-                              children=[
-                                  dbc.Input(id='search_input', className="me-2",
-                                            placeholder="Type in username"),
-                                  dbc.Button("Search", id="search_button", color='success', outline=True,
-                                             external_link=True, type='submit',
-                                             style={'margin-left': 8})])
-
-    nav_buttons = html.Div(className="navbar-collapse",
-                           children=[
-                               html.Ul(className="navbar-nav", children=[
-                                   html.Li(className="nav-item", children=[
-                                       html.A(className="nav-link", href="/",
-                                              children="Home")
-                                   ]),
-                                   html.Li(className="nav-item", children=[
-                                       html.A(className="nav-link", href="/forum",
-                                              children="Forum")
-                                   ]),
-                                   html.Li(className="nav-item", children=[
-                                       html.A(className="nav-link", id="third_nav")
-                                   ]),
-                                   html.Li(className="nav-item", children=[
-                                       html.A(className="nav-link", id="forth_nav")
-                                   ]),
-                               ]),
-                               search_button
-                           ])
-
     ## Creating the app layout
     dash_app.layout = html.Div(id='page_content', children=[
-        html.Header(
-            dbc.Navbar(className="navbar", expand='lg', light=True, color='light',
-                       children=[html.Div(className="container-fluid", children=[
-                           html.Img(
-                               src='data:image/png;base64,{}'.format(logo().decode()),
-                               width=50,
-                               style={'margin-right': 10, 'margin-left': -19},
-                               className='img-thumbnail'),
-                           html.A(dbc.NavbarBrand("Sander Squad", href="/",
-                                                  external_link=True)),
-                           dbc.NavbarToggler(id="navbar-toggler"),
-                           dbc.Collapse(id="navbar-collapse", navbar=True,
-                                        children=[nav_buttons]
-                                        ),
-                       ]),
-                                 ])
-        ),
+        html.Header(nav_buttons()),
 
         dbc.Container(fluid=True, children=[
             # First row

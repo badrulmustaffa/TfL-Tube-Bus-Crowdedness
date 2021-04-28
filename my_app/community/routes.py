@@ -25,7 +25,7 @@ def profile():
     profile = Profile.query.join(User).filter(
         User.id == current_user.id).first()
     if profile:
-        return redirect(url_for('community_bp.display_profile',
+        return redirect(url_for('community_bp.view_profile',
                                 username=current_user.username))
     else:
         flash("No profile found. Please create a new one")
@@ -82,23 +82,22 @@ def update_profile():
                            message='Profile update')
 
 
-@community_bp.route('/display_profile', methods=['GET', 'POST'])
-@community_bp.route('/display_profile/<username>', methods=['POST', 'GET'])
+@community_bp.route('/display_profiles', methods=['GET', 'POST'])
+@community_bp.route('/display_profiles/<username>', methods=['POST', 'GET'])
 @login_required
-def display_profile(username=None):
+def display_profiles(username=None):
     results = None
-    profile_html = 'profile_view.html'
+    profile_html = 'profile_display.html'
     if username is None:
         if request.method == 'POST':
             term = request.form['search_term']
             if term == "":
                 flash("Enter a name to search for")
                 return redirect(url_for('community_bp.index'))
-            results = Profile.query.filter(
-                Profile.username.contains(term)).all()
-            profile_html = 'profile_display.html'
+            results = Profile.query.filter(Profile.username.contains(term)).all()
     else:
-        results = Profile.query.filter_by(username=username).all()
+        term = username
+        results = Profile.query.filter(Profile.username.contains(term)).all()
     if not results:
         flash("Username not found")
         return redirect(url_for('community_bp.index'))
@@ -109,3 +108,23 @@ def display_profile(username=None):
             url = photos.url(result.photo)
             urls.append(url)
     return render_template(profile_html, profiles=zip(results, urls))
+
+
+@community_bp.route('/view_profile', methods=['GET', 'POST'])
+@community_bp.route('/view_profile/<username>', methods=['POST', 'GET'])
+@login_required
+def view_profile(username=None):
+    profile_html = 'profile_view.html'
+    if username is None:
+        username = current_user.username
+
+    results = Profile.query.filter_by(username=username).all()
+
+    urls = []
+    for result in results:
+        if result.photo:
+            url = photos.url(result.photo)
+            urls.append(url)
+    return render_template(profile_html, profiles=zip(results, urls))
+
+

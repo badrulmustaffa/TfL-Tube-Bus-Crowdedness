@@ -4,9 +4,6 @@ from flask import Blueprint, render_template, request, make_response, redirect, 
     url_for, session, flash
 from flask_login import current_user
 
-from my_app.main.forms import NavigationForm
-from my_app.main.functions import RenderMap
-
 main_bp = Blueprint('main_bp', __name__)
 
 
@@ -29,7 +26,7 @@ main_bp = Blueprint('main_bp', __name__)
 #
 #         flash("Well Done")
 #         return redirect(url_for('main_bp.index'))
-#     return render_template('navigation.html', form=form)
+#     return render_template('', form=form)
 
 
 # @main_bp.route('/', defaults={'name': 'traveler'}, methods=['GET', 'POST'])
@@ -47,7 +44,7 @@ main_bp = Blueprint('main_bp', __name__)
 #         flash("Well Done")
 #         return redirect(url_for('main_bp.index'))
 #
-#     return render_template('navigation.html', title="Navigate",
+#     return render_template('', title="Navigate",
 #                            name=name, form=form)
 
 
@@ -70,6 +67,5 @@ def index(name):
 @main_bp.route('/navigation/<mean>/<start>/<end>', methods=['GET', 'POST'])
 def navigation_process(mean, start, end):
     text = "The user is requesting for {} route, from {} to {}" .format(mean, start, end)
-
     return render_template('index.html', title="Navigation finder",
                            name='Bengong', message=text)

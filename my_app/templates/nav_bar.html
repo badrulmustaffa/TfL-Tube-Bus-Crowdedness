@@ -33,7 +33,7 @@
                     </li>
                 {% endif %}
             </ul>
-            <form class="d-flex" action="{{ url_for("community_bp.display_profile") }}" method="post">
+            <form class="d-flex" action="{{ url_for("community_bp.display_profiles") }}" method="post">
                 <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
                 <input class="form-control me-2" type="search" placeholder="Type in username"
                        aria-label="Type in username"

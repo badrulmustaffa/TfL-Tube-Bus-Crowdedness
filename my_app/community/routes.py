@@ -87,6 +87,7 @@ def update_profile():
 @login_required
 def display_profile(username=None):
     results = None
+    profile_html = 'profile_view.html'
     if username is None:
         if request.method == 'POST':
             term = request.form['search_term']
@@ -95,10 +96,9 @@ def display_profile(username=None):
                 return redirect(url_for('community_bp.index'))
             results = Profile.query.filter(
                 Profile.username.contains(term)).all()
-            html = 'profile_display.html'
+            profile_html = 'profile_display.html'
     else:
         results = Profile.query.filter_by(username=username).all()
-        html = 'profile_view.html'
     if not results:
         flash("Username not found")
         return redirect(url_for('community_bp.index'))
@@ -108,4 +108,4 @@ def display_profile(username=None):
         if result.photo:
             url = photos.url(result.photo)
             urls.append(url)
-    return render_template(html, profiles=zip(results, urls))
+    return render_template(profile_html, profiles=zip(results, urls))

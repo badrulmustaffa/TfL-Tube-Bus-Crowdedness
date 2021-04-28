@@ -16,7 +16,7 @@ def create_app(config_classname):
     :param config_classname: Specifies the configuration class
     :return: Return a configured Flask object
     """
-    app = Flask(__name__)
+    app = Flask(__name__, static_folder='static')
     app.config.from_object(config_classname)
     # app.static_folder = 'static'
 

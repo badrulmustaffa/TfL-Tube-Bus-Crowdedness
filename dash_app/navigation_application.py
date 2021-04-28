@@ -13,7 +13,7 @@ FA = "https://use.fontawesome.com/releases/v5.12.1/css/all.css"
 
 def init_dashboard(flask_app):
     """Create a Plotly Dash dashboard"""
-    dash_app = dash.Dash(server=flask_app,
+    dash_app = dash.Dash(server=flask_app, title='Navigation', assets_folder='dash_app/assets',
                          routes_pathname_prefix="/navigation_dash/",
                          external_stylesheets=[dbc.themes.BOOTSTRAP, FA])
 
@@ -36,7 +36,8 @@ def init_dashboard(flask_app):
             dbc.Row([
                 # First column
                 dbc.Col(width=4, children=[
-                    html.H2('Navigation'),
+                    html.H2('TfL Zone 1 Navigation'),
+                    html.P("Fill in your journey information below to check the route crowdedness"),
                     dbc.Card(children=[
                         dbc.Container(
                             fluid=True, children=[
@@ -63,7 +64,8 @@ def init_dashboard(flask_app):
 
                                     html.Div(children=[
                                         dbc.Button("Clear", id="clear_button", color="primary", className="mr-2"),
-                                        dbc.Button("Go", id="go_button", color="primary", className="mr-2")
+                                        dbc.Button("Go", id="go_button", color="primary", className="mr-2",
+                                                   external_link=True)
                                     ])
                                 ])
                             ])
@@ -93,8 +95,7 @@ def init_callback(app):
     @app.callback(
         Output("collapse", "is_open"),
         [Input("collapse-button", "n_clicks")],
-        [State("collapse", "is_open")],
-    )
+        [State("collapse", "is_open")])
     def toggle_collapse(n, is_open):
         if n:
             return not is_open
@@ -102,7 +103,7 @@ def init_callback(app):
 
     @app.callback(Output("navbar-collapse", "is_open"),
                   [Input("navbar-toggler", "n_clicks")],
-                  [State("navbar-collapse", "is_open")], )
+                  [State("navbar-collapse", "is_open")])
     def toggle_navbar_collapse(n, is_open):
         if n:
             return not is_open
@@ -124,26 +125,23 @@ def init_callback(app):
         tube_clicked = True
         bus_bold = True
         tube_bold = False
-
         if bus_n_clicks is not None:
             mean_select = 'Bus'
             bus_clicked = False
             tube_clicked = True
             bus_bold = True
             tube_bold = False
-
-        if tube_n_clicks is not None:
+        elif tube_n_clicks is not None:
             mean_select = 'Tube'
             bus_clicked = True
             tube_clicked = False
             bus_bold = False
             tube_bold = True
-
         drop = [{"label": x, "value": x} for x in AreaList(mean_select)['Name']]
-
         return drop, drop, None, None, bus_clicked, tube_clicked, bus_bold, tube_bold
 
-    @app.callback(Output("line_figure", "children"),
+    @app.callback([Output("line_figure", "children"),
+                   Output("go_button", "href")],
                   [Input("bus_select", "outline"),
                    Input("tube_select", "outline"),
                    Input("start_select", "value"),
@@ -155,7 +153,8 @@ def init_callback(app):
         if not tube_clicked:
             mean_select = 'Tube'
         fig = CreateBorders(mean_select, start_select, end_select)
-        return dcc.Graph(figure=fig)
+        link = '/navigation/{}/{}/{}'.format(mean_select, start_select, end_select)
+        return dcc.Graph(figure=fig), link
 
     @app.callback([Output("start_select", "value"),
                    Output("end_select", "value")],

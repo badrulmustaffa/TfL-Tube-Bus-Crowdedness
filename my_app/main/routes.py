@@ -51,45 +51,25 @@ main_bp = Blueprint('main_bp', __name__)
 #                            name=name, form=form)
 
 
-@main_bp.route('/', defaults={'name': 'traveler'}, methods=['GET', 'POST'])
-@main_bp.route('/<name>', methods=['GET', 'POST'])
-def index(name):
-    if not current_user.is_anonymous:
-        name = current_user.username
-
-    form = NavigationForm()
-    if request.method == 'POST':
-        return redirect(url_for('main_bp.map'))
-
-    return render_template('navigation.html', title="Navigate",
-                           name=name, form=form)
-
-
-@main_bp.route('/map', defaults={'name': 'traveler'}, methods=['GET', 'POST'])
-@main_bp.route('/map/<name>', methods=['GET', 'POST'])
-def map(name):
-    if not current_user.is_anonymous:
-        name = current_user.username
-
-    mean = request.form.get('mean')
-    start = request.form.get('start')
-    end = request.form.get('end')
-    text = "You are using {}, from {} to {}".format(mean, start, end)
-    # if request.method == 'POST':
-    #     return redirect(url_for('main_bp.index'))
-    return render_template('navigation_map.html', title="Navigation map 1",
-                           name=name, message=text)
-
-
-# @main_bp.route('/nav', defaults={'name': 'traveler'}, methods=['GET', 'POST'])
-# @main_bp.route('/nav/<name>', methods=['GET', 'POST'])
-# def nav(name):
+# @main_bp.route('/', defaults={'name': 'traveler'}, methods=['GET', 'POST'])
+# @main_bp.route('/<name>', methods=['GET', 'POST'])
+# def index(name):
 #     if not current_user.is_anonymous:
 #         name = current_user.username
 #
-#     mean = request.form.get('mean')
-#     start = request.form.get('start')
-#     end = request.form.get('end')
-#     text = "again, You are using {}, from {} to {}".format(mean, start, end)
-#     return render_template('navigation_map.html', title="Navigation map 2",
-#                            name=name, message=text)
+#     return render_template('index.html', title="Navigate",
+#                            name=name, message='This page is under construction')
+
+
+@main_bp.route('/', defaults={'name': 'traveler'})
+@main_bp.route('/<name>')
+def index(name):
+    return redirect('/navigation_dash/')
+
+
+@main_bp.route('/navigation/<mean>/<start>/<end>', methods=['GET', 'POST'])
+def navigation_process(mean, start, end):
+    text = "The user is requesting for {} route, from {} to {}" .format(mean, start, end)
+
+    return render_template('index.html', title="Navigation finder",
+                           name='Bengong', message=text)

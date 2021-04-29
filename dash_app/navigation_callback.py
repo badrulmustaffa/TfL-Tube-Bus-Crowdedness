@@ -79,8 +79,10 @@ def init_callback(app):
             mean_select = 'Bus'
         if not tube_clicked:
             mean_select = 'Tube'
+
         fig = CreateBorders(mean_select, start_select, end_select)
         link = '/navigation/{}/{}/{}'.format(mean_select, start_select, end_select)
+
         return dcc.Graph(figure=fig), link
 
     @app.callback([Output("start_select", "value"),

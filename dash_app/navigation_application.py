@@ -3,11 +3,8 @@ import dash
 import dash_html_components as html
 import dash_bootstrap_components as dbc
 import dash_core_components as dcc
-from flask_login import current_user
-from dash.dependencies import Output, Input, State
 from dash_app.layout_template import logo, nav_buttons
 from dash_app.navigation_callback import init_callback
-from dash_app.navigation_functions import AreaList, CreateBorders
 
 FA = "https://use.fontawesome.com/releases/v5.12.1/css/all.css"
 
@@ -65,7 +62,7 @@ def init_dashboard(flask_app):
                                         icon="danger", ),
 
                                     html.Div(children=[
-                                        dbc.Button("Clear", id="clear_button",
+                                        dbc.Button("Clear", id="clear_button", type='reset',
                                                    color="primary", className="mr-2",
                                                    n_clicks=0),
                                         dbc.Button("Go", id="go_button",

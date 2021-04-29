@@ -6,7 +6,7 @@ import json
 
 
 def AreaList(mean):
-    ''' Generating a list of tube stations for Dash Dropdown'''
+    """''' Generating a list of tube stations for Dash Dropdown '''"""
     data = pd.ExcelFile('../data/Tube_and_Bus_Route_Stops.xls')
     if 'Bus' in mean:
         sheet = 'Bus Regions'
@@ -17,6 +17,7 @@ def AreaList(mean):
 
 
 def CreateBorders(mean, start, end):
+    """ Inserting the transportation mode as mean, start point and end point and returning the """
     # Setting the json for appropriate mean and opening the file
     if 'Bus' in mean:
         json_file = '../data/bus_region_map.json'

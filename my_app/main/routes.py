@@ -77,7 +77,7 @@ def navigation_process(mean, start, end):
     mean2, start2, end2 = ConvertNavigationVariables(mean, start, end)
     text2 = "Equivalent to for {} route, from {} to {}".format(mean2, start2, end2)
 
-    Graph.dijkstra(mean2, start2, end2)
-    path = Graph.pathlist
+    # Graph.dijkstra(mean2, start2, end2)
+    # path = Graph.pathlist
     return render_template('index.html', title="Navigation finder",
                            name='Bengong', message=text, message2=text2, path=path)

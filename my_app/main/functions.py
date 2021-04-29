@@ -4,7 +4,7 @@ def ConvertNavigationVariables(mean, start, end):
     data = pd.ExcelFile('../data/Tube_and_Bus_Route_Stops.xls')
     sheet = 'Bus Regions'
     mean_map = 'bus_map'
-    if 'Tube' in  mean:
+    if 'Tube' in mean:
         sheet = 'Tube Regions'
         mean_map = 'tube_map'
     df = pd.read_excel(data, sheet_name=sheet, skiprows=1)
@@ -53,8 +53,6 @@ class Graph:
         print(j)
         self.pathlist.append(j)
 
-
-
     def printSolution(self, dist, parent, src, end):
 
         print("Vertex \t\tDistance from Source\tPath")
@@ -92,13 +90,12 @@ class Graph:
         self.printSolution(dist, parent, src, end)
 
 
-data = pd.read_excel('multi-year-station-entry-and-exit-figures-dataset-for-calculation.xls',
+data = pd.read_excel('../data/multi-year-station-entry-and-exit-figures.xls',
                      sheet_name='2017 Entry & Exit (Zone 1)', skiprows=6)
 
 df = pd.DataFrame(data)
 df1 = pd.DataFrame(index=range(23), columns=['total']).fillna(0)
 df2 = df['Group Alphabet'].drop_duplicates().dropna().reset_index()
-
 
 for x, poo in df1.iterrows():
     for y, lines in df.iterrows():
@@ -132,7 +129,6 @@ T = df3.iloc[19]['total']
 U = df3.iloc[20]['total']
 V = df3.iloc[21]['total']
 W = df3.iloc[22]['total']
-
 
 g = Graph()
 
@@ -182,7 +178,6 @@ bus_map = [[0, A, A, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],  # A 0
            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, P, P, 0, P, P],  # P 15
            [0, 0, 0, 0, 0, 0, 0, Q, 0, 0, 0, 0, 0, Q, 0, Q, 0, Q],  # Q 16
            [0, 0, 0, 0, 0, R, 0, 0, 0, 0, 0, 0, 0, 0, 0, R, R, 0]]  # R 17
-
 
 g.dijkstra(tube_map, 10, 3)
 print(g.pathlist)

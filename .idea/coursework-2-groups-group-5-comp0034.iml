@@ -3,8 +3,9 @@
   <component name="NewModuleRootManager">
     <content url="file://$MODULE_DIR$">
       <excludeFolder url="file://$MODULE_DIR$/venv" />
+      <excludeFolder url="file://$MODULE_DIR$/new/venv" />
     </content>
-    <orderEntry type="jdk" jdkName="Python 3.8 (coursework-2-groups-group-5-comp0034)" jdkType="Python SDK" />
+    <orderEntry type="jdk" jdkName="Python 3.8 (coursework-2-groups-group-5-comp0034) (2)" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
   </component>
   <component name="TemplatesService">

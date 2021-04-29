@@ -4,6 +4,8 @@ from flask import Blueprint, render_template, request, make_response, redirect, 
     url_for, session, flash
 from flask_login import current_user
 
+from my_app.main.functions import ConvertNavigationVariables
+
 main_bp = Blueprint('main_bp', __name__)
 
 
@@ -66,6 +68,13 @@ def index(name):
 
 @main_bp.route('/navigation/<mean>/<start>/<end>', methods=['GET', 'POST'])
 def navigation_process(mean, start, end):
-    text = "The user is requesting for {} route, from {} to {}" .format(mean, start, end)
+    text = "The user is requesting for {} route, from {} to {}".format(mean, start, end)
+    if start == 'None':
+        start = 'Bayswater'
+    if end == 'None':
+        end = 'Bayswater'
+
+    mean2, start2, end2 = ConvertNavigationVariables(mean, start, end)
+    text2 = "Equivalent to for {} route, from {} to {}".format(mean2, start2, end2)
     return render_template('index.html', title="Navigation finder",
-                           name='Bengong', message=text)
+                           name='Bengong', message=text, message2=text2)

@@ -4,7 +4,7 @@ from flask import Blueprint, render_template, request, make_response, redirect, 
     url_for, session, flash
 from flask_login import current_user
 
-from my_app.main.functions import ConvertNavigationVariables
+from my_app.main.functions import ConvertNavigationVariables, Graph
 
 main_bp = Blueprint('main_bp', __name__)
 
@@ -76,5 +76,8 @@ def navigation_process(mean, start, end):
 
     mean2, start2, end2 = ConvertNavigationVariables(mean, start, end)
     text2 = "Equivalent to for {} route, from {} to {}".format(mean2, start2, end2)
+
+    Graph.dijkstra(mean2, start2, end2)
+    path = Graph.pathlist
     return render_template('index.html', title="Navigation finder",
-                           name='Bengong', message=text, message2=text2)
+                           name='Bengong', message=text, message2=text2, path=path)

@@ -86,7 +86,6 @@ class Graph:
                     if dist[u] + graph[u][i] < dist[i]:
                         dist[i] = dist[u] + graph[u][i]
                         parent[i] = u
-        print(parent)
         self.printSolution(dist, parent, src, end)
 
 
@@ -184,6 +183,7 @@ bus_map = [[0, A, A, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],  # A 0
 
 def FindPath(mean, start, end):
     mean_map, start_number, end_number = ConvertNavigationVariables(mean, start, end)
+    print(mean_map, start_number, end_number)
     g.dijkstra(mean_map, start_number, end_number)
     path = g.pathlist
     return path

@@ -182,7 +182,7 @@ bus_map = [[0, A, A, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],  # A 0
 # g.dijkstra(tube_map, 10, 3)
 # print(g.pathlist)
 
-def FindPath(mean, start, end):
-    mean_map, start_number, end_number = ConvertNavigationVariables(mean, start, end)
-    #path =
-    return path
+# def FindPath(mean, start, end):
+#     mean_map, start_number, end_number = ConvertNavigationVariables(mean, start, end)
+#     #path =
+#     return path

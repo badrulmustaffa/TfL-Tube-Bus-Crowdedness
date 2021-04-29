@@ -1,63 +1,7 @@
-# from datetime import datetime
-import flask
-from flask import Blueprint, render_template, request, make_response, redirect, \
-    url_for, session, flash
-from flask_login import current_user
-
+from flask import Blueprint, render_template, redirect
 from my_app.main.functions import ConvertNavigationVariables, Graph
 
 main_bp = Blueprint('main_bp', __name__)
-
-
-# @main_bp.route('/', defaults={'name': 'traveler'})
-# @main_bp.route('/<name>')
-# def index(name):
-#     if not current_user.is_anonymous:
-#         name = current_user.username
-#     return render_template('index.html', title="Home page",
-#                            name=name)
-#
-#
-# @main_bp.route('/navigation', methods=['GET', 'POST'])
-# def navigation():
-#     form = NavigationForm()
-#     if request.method == 'POST':
-#         map = RenderMap(form.mean.data)
-#         start = form.start.data
-#         end = form.end.data
-#
-#         flash("Well Done")
-#         return redirect(url_for('main_bp.index'))
-#     return render_template('', form=form)
-
-
-# @main_bp.route('/', defaults={'name': 'traveler'}, methods=['GET', 'POST'])
-# @main_bp.route('/<name>', methods=['GET', 'POST'])
-# def index(name):
-#     if not current_user.is_anonymous:
-#         name = current_user.username
-#
-#     form = NavigationForm()
-#     if request.method == 'POST':
-#         map = RenderMap(form.mean.data)
-#         start = form.start.data
-#         end = form.end.data
-#
-#         flash("Well Done")
-#         return redirect(url_for('main_bp.index'))
-#
-#     return render_template('', title="Navigate",
-#                            name=name, form=form)
-
-
-# @main_bp.route('/', defaults={'name': 'traveler'}, methods=['GET', 'POST'])
-# @main_bp.route('/<name>', methods=['GET', 'POST'])
-# def index(name):
-#     if not current_user.is_anonymous:
-#         name = current_user.username
-#
-#     return render_template('index.html', title="Navigate",
-#                            name=name, message='This page is under construction')
 
 
 @main_bp.route('/', defaults={'name': 'traveler'})
@@ -80,4 +24,4 @@ def navigation_process(mean, start, end):
     # Graph.dijkstra(mean2, start2, end2)
     # path = Graph.pathlist
     return render_template('index.html', title="Navigation finder",
-                           name='Bengong', message=text, message2=text2, path=path)
+                           name='Bengong', message=text, message2=text2)

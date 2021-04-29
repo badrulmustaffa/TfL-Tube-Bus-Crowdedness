@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, redirect
-from my_app.main.functions import ConvertNavigationVariables, Graph
+from my_app.main.functions import ConvertNavigationVariables, Graph, FindPath
 
 main_bp = Blueprint('main_bp', __name__)
 
@@ -18,10 +18,12 @@ def navigation_process(mean, start, end):
     if end == 'None':
         end = 'Bayswater'
 
-    mean2, start2, end2 = ConvertNavigationVariables(mean, start, end)
-    text2 = "Equivalent to for {} route, from {} to {}".format(mean2, start2, end2)
+    # mean2, start2, end2 = ConvertNavigationVariables(mean, start, end)
+    # text2 = "Equivalent to for {} route, from {} to {}".format(mean2, start2, end2)
 
     # Graph.dijkstra(mean2, start2, end2)
     # path = Graph.pathlist
+    text2 = FindPath(mean, start, end)
+    #FindPath(mean, start, end)
     return render_template('index.html', title="Navigation finder",
                            name='Bengong', message=text, message2=text2)

@@ -4,14 +4,12 @@ import plotly.graph_objects as go
 import plotly.express as px
 import json
 
-
 def AreaList(mean):
     """''' Generating a list of tube stations for Dash Dropdown '''"""
     data = pd.ExcelFile('../data/Tube_and_Bus_Route_Stops.xls')
-    if 'Bus' in mean:
-        sheet = 'Bus Regions'
-    else:
-        sheet = 'Tube Regions'
+    sheet = 'Bus Regions Simplified'
+    if 'Tube' in mean:
+        sheet = 'Tube Regions Simplified'
     area_list = pd.read_excel(data, sheet_name=sheet, skiprows=1)
     return area_list
 
@@ -19,10 +17,9 @@ def AreaList(mean):
 def CreateBorders(mean, start, end):
     """ Inserting the transportation mode as mean, start point and end point and returning the """
     # Setting the json for appropriate mean and opening the file
-    if 'Bus' in mean:
-        json_file = '../data/bus_region_map.json'
-    else:
-        json_file = '../data/tube_region_map.json'
+    json_file = '../data/bus_areas_simplified.json'
+    if 'Tube' in mean:
+        json_file = '../data/tube_areas_simplified.json'
     with open(json_file) as jsonfile:
         geojson = json.load(jsonfile)
 
@@ -36,13 +33,13 @@ def CreateBorders(mean, start, end):
         end = ''
 
     # Create dataframe from dataset
-    df = AreaList(mean)[{'Name'}].set_index('Name')
+    df = AreaList(mean)[{'Group stations'}].set_index('Group stations')
     df["Status"] = np.nan
     df.loc[start, 'Status'] = 'Start'
     df.loc[end, 'Status'] = 'End'
     df = df.reset_index().dropna()
 
-    fig = px.choropleth_mapbox(df, geojson=geojson, locations='Name',
+    fig = px.choropleth_mapbox(df, geojson=geojson, locations='Group stations',
                                color='Status',
                                color_discrete_map={'Start': 'blue', 'End': 'red'},
                                mapbox_style="open-street-map",

@@ -64,7 +64,7 @@ def init_callback(app):
             tube_clicked = False
             bus_bold = False
             tube_bold = True
-        drop = [{"label": x, "value": x} for x in AreaList(mean_select)['Name']]
+        drop = [{"label": x, "value": x} for x in AreaList(mean_select)['Group stations']]
         return drop, drop, None, None, bus_clicked, tube_clicked, bus_bold, tube_bold
 
     @app.callback([Output("line_figure", "children"),

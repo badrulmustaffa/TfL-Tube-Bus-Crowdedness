@@ -68,9 +68,9 @@ class Graph:
 
 def ConvertNavigationVariables(mean, start, end):
     data = pd.ExcelFile('../data/Tube_and_Bus_Route_Stops.xls')
-    sheet = 'Bus Regions'
+    sheet = 'Bus Regions Simplified'
     if 'Tube' in mean:
-        sheet = 'Tube Regions'
+        sheet = 'Tube Regions Simplified'
     df = pd.read_excel(data, sheet_name=sheet, skiprows=1)
 
     if start is None:
@@ -79,7 +79,7 @@ def ConvertNavigationVariables(mean, start, end):
         end = ''
 
     # Create dataframe from dataset
-    df = df[{'Name', 'Number'}].set_index('Name')
+    df = df[{'Group stations', 'Number'}].set_index('Group stations')
     start_number = df.loc[start, 'Number']
     end_number = df.loc[end, 'Number']
 

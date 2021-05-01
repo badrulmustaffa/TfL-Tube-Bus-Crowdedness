@@ -127,3 +127,8 @@ def navigation_template():
 
     ])
     return page
+
+
+def navigation_analysis():
+    page = dbc.Container()
+    return page

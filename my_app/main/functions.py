@@ -66,6 +66,7 @@ class Graph:
                         parent[i] = u
         self.printSolution(dist, parent, src, end)
 
+
 def ConvertNavigationVariables(mean, start, end):
     data = pd.ExcelFile('../data/Tube_and_Bus_Route_Stops.xls')
     sheet = 'Bus Regions Simplified'
@@ -84,6 +85,7 @@ def ConvertNavigationVariables(mean, start, end):
     end_number = df.loc[end, 'Number']
 
     return start_number, end_number
+
 
 def FindPath(mean, start, end):
     start_number, end_number = ConvertNavigationVariables(mean, start, end)
@@ -185,6 +187,3 @@ def FindPath(mean, start, end):
     g.dijkstra(mean_map, start_number, end_number)
     path = g.pathlist
     return path
-
-
-

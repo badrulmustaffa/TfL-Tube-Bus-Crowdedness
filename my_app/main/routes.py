@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, redirect
-from my_app.main.functions import ConvertNavigationVariables, Graph, FindPath
+# from my_app.main.functions import ConvertNavigationVariables, Graph, FindPath
 
 main_bp = Blueprint('main_bp', __name__)
 
@@ -23,7 +23,7 @@ def navigation_process(mean, start, end):
 
     # Graph.dijkstra(mean2, start2, end2)
     # path = Graph.pathlist
-    text2 = FindPath(mean, start, end)
+    text2 = 'Fuck you'
     #FindPath(mean, start, end)
     return render_template('index.html', title="Navigation finder",
                            name='Bengong', message=text, message2=text2)

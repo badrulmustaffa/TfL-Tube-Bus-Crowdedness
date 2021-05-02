@@ -1,7 +1,7 @@
 import dash_core_components as dcc
 from flask_login import current_user
 from dash.dependencies import Output, Input, State
-from dash_app.navigation_functions import AreaList, CreateBorders
+from dash_app.navigation_functions import AreaList, CreateBorders, CreateBordersWithPath
 
 
 ## Create callback for changing line from dropdown
@@ -80,7 +80,10 @@ def init_callback(app):
         if not tube_clicked:
             mean_select = 'Tube'
 
-        fig = CreateBorders(mean_select, start_select, end_select)
+        if end_select:
+            fig = CreateBordersWithPath(mean_select, start_select, end_select)
+        else:
+            fig = CreateBorders(mean_select, start_select, end_select)
         link = '/navigation/{}/{}/{}'.format(mean_select, start_select, end_select)
 
         return dcc.Graph(figure=fig), link

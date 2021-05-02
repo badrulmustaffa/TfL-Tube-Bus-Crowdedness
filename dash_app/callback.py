@@ -1,8 +1,8 @@
 import dash_core_components as dcc
 from flask_login import current_user
 from dash.dependencies import Output, Input, State
-from dash_app.navigation_functions import AreaList, CreateBorders, CreateBordersWithPath
-from dash_app.navigation_layout import navigation_analysis, navigation_finder
+from dash_app.functions import AreaList, CreateBorders, CreateBordersWithPath
+from dash_app.layout import navigation_analysis, navigation_finder
 
 
 ## Create callback for changing line from dropdown
@@ -102,10 +102,9 @@ def init_callback(app):
     def search_profile(value):
         return '/community/display_profiles/{}'.format(value)
 
-    @app.callback(Output("analysis_page", "style"),
-                  [Input("go_button", "n_clicks")])
-    def analysis_button(go_n_clicks):
-        if go_n_clicks is not None:
-            return {'display': 'block'}
-        else:
-            return {'display': 'none'}
+    # @app.callback([Output("text", "children"),
+    #               Output("go_button", "n_clicks")],
+    #               [Input("go_button", "n_clicks")])
+    # def analysis_button(go_n_clicks):
+    #     if go_n_clicks is not None:
+

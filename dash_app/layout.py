@@ -3,7 +3,7 @@ import dash_bootstrap_components as dbc
 import dash_core_components as dcc
 import dash_html_components as html
 
-from dash_app.navigation_functions import RenderTubeUsageGraph, RenderBusLineGraph
+from dash_app.functions import RenderTubeUsageGraph, RenderBusLineGraph
 
 
 def logo():
@@ -77,14 +77,12 @@ def navigation_finder():
                                 html.Br(),
                                 dbc.Toast(
                                     [dbc.Button(
-                                        [html.I(className="fas fa-bus mr-2"),
-                                         "BUS"]
+                                        [html.I(className="fas fa-bus mr-2"), "BUS"]
                                         , id="bus_select", color="success",
                                         outline=False, n_clicks=0,
                                         active=True, style={'margin-right': 10}),
                                         dbc.Button(
-                                            [html.I(className="fas fa-subway mr-2"),
-                                             "TRAIN"]
+                                            [html.I(className="fas fa-subway mr-2"), "TRAIN"]
                                             , id="tube_select", color="success",
                                             outline=True, n_clicks=0)],
                                     header="Transportation mode:",
@@ -108,9 +106,9 @@ def navigation_finder():
                                     dbc.Button("Clear", id="clear_button", type='reset',
                                                color="primary", className="mr-2",
                                                n_clicks=0),
-                                    dbc.Button("Go", id="go_button",
+                                    dbc.Button("Go", id="go_button", type='button',
                                                color="primary", className="mr-2",
-                                               n_clicks=0)
+                                               n_clicks=0),
                                 ])
                             ])
                         ])

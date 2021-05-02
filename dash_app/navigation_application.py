@@ -17,9 +17,9 @@ def navigation_dash(flask_app):
 
 
     ## Creating the app layout
-    dash_app.layout = html.Div(id='page_content', children=[
+    dash_app.layout = html.Div(id='navigation_page', children=[
         html.Header(nav_buttons()),
-        html.Main(html.Div(navigation_finder())),
+        html.Main(navigation_finder()),
     ])
 
     init_callback(dash_app)

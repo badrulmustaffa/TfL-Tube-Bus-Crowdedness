@@ -108,6 +108,7 @@ def navigation_finder():
                                                n_clicks=0),
                                     dbc.Button("Go", id="go_button", type='button',
                                                color="primary", className="mr-2",
+                                               external_link='True',
                                                n_clicks=0),
                                 ])
                             ])

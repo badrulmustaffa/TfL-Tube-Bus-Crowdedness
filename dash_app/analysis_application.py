@@ -17,9 +17,9 @@ def analysis_dash(flask_app):
 
 
     ## Creating the app layout
-    dash_app.layout = html.Div(id='page_content', children=[
+    dash_app.layout = html.Div(id='analysis_page', children=[
         html.Header(nav_buttons()),
-        html.Main(html.Div(navigation_analysis())),
+        html.Main(navigation_analysis()),
     ])
 
     init_callback(dash_app)

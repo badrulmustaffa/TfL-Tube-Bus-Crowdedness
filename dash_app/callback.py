@@ -14,7 +14,7 @@ def init_callback(app):
                    Output("third_nav", "href"),
                    Output("forth_nav", "children"),
                    Output("forth_nav", "href")],
-                  [Input("page_content", "id")])
+                  [Input("navigation_page", "id")])
     def load_navbar(input):
         """ Display navigations based on current user"""
         name = 'traveler'
@@ -107,4 +107,5 @@ def init_callback(app):
     #               [Input("go_button", "n_clicks")])
     # def analysis_button(go_n_clicks):
     #     if go_n_clicks is not None:
+
 

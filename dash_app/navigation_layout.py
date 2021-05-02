@@ -3,6 +3,8 @@ import dash_bootstrap_components as dbc
 import dash_core_components as dcc
 import dash_html_components as html
 
+from dash_app.navigation_functions import RenderTubeUsageGraph, RenderBusLineGraph
+
 
 def logo():
     image_filename = '../my_app/static/img/SarahSquad.png'  # replace with your own image
@@ -59,7 +61,7 @@ def nav_buttons():
     return full_navbar
 
 
-def navigation_template():
+def navigation_finder():
     page = dbc.Container(fluid=True, children=[
         # First row
         dbc.Row([
@@ -108,8 +110,7 @@ def navigation_template():
                                                n_clicks=0),
                                     dbc.Button("Go", id="go_button",
                                                color="primary", className="mr-2",
-                                               n_clicks=0,
-                                               external_link=True)
+                                               n_clicks=0)
                                 ])
                             ])
                         ])
@@ -130,5 +131,12 @@ def navigation_template():
 
 
 def navigation_analysis():
-    page = dbc.Container()
+    page = dbc.Container(
+        [dbc.Card([
+            dcc.Graph(id='second_card', figure=RenderTubeUsageGraph())
+        ]),
+            dbc.Card([
+                dcc.Graph(id='third_card')
+            ])
+        ])
     return page

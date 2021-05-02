@@ -1,7 +1,8 @@
+import plotly.graph_objects as go
+import matplotlib.pyplot as plt
+import plotly.express as px
 import pandas as pd
 import numpy as np
-import plotly.graph_objects as go
-import plotly.express as px
 import json
 
 
@@ -63,18 +64,17 @@ class Graph:
         self.printSolution(dist, parent, src, end)
 
 
-def ConvertNavigationVariables(mean, start, end):
+def AreaList(mean):
+    """''' Generating a list of tube stations for Dash Dropdown '''"""
     data = pd.ExcelFile('../data/Tube_and_Bus_Route_Stops.xls')
     sheet = 'Bus Regions Simplified'
     if 'Tube' in mean:
         sheet = 'Tube Regions Simplified'
-    df = pd.read_excel(data, sheet_name=sheet, skiprows=1)
+    return pd.read_excel(data, sheet_name=sheet, skiprows=1)
 
-    if start is None:
-        start = ''
-    if end is None:
-        end = ''
 
+def ConvertNavigationVariables(mean, start, end):
+    df = AreaList(mean)
     # Create dataframe from dataset
     df = df[{'Group stations', 'Number'}].set_index('Group stations')
     start_number = df.loc[start, 'Number']
@@ -185,18 +185,8 @@ def FindPath(mean, start, end):
     return path
 
 
-def AreaList(mean):
-    """''' Generating a list of tube stations for Dash Dropdown '''"""
-    data = pd.ExcelFile('../data/Tube_and_Bus_Route_Stops.xls')
-    sheet = 'Bus Regions Simplified'
-    if 'Tube' in mean:
-        sheet = 'Tube Regions Simplified'
-    area_list = pd.read_excel(data, sheet_name=sheet, skiprows=1)
-    return area_list
-
-
 def GeojsonLoader(mean):
-        # Setting the json for appropriate mean and opening the file
+    # Setting the json for appropriate mean and opening the file
     json_file = '../data/bus_areas_simplified.json'
     if 'Tube' in mean:
         json_file = '../data/tube_areas_simplified.json'
@@ -218,7 +208,7 @@ def CreateBorders(mean, start, end):
     df.loc[start, 'Status'] = 'Start'
     df.loc[end, 'Status'] = 'End'
     df = df.reset_index().dropna()
-    return RenderFigure(df, geojson)
+    return RenderNavigationMap(df, geojson)
 
 
 def CreateBordersWithPath(mean, start, end):
@@ -237,20 +227,19 @@ def CreateBordersWithPath(mean, start, end):
         j += 1
 
     df = df.reset_index().dropna()
-    return RenderFigure(df, geojson)
+    return RenderNavigationMap(df, geojson)
 
 
-def RenderFigure(df, geojson):
+def RenderNavigationMap(df, geojson):
     mapbox_access_token = "pk.eyJ1IjoiYmFkcnVsbXVzdGFmZmEiLCJhIjoiY2ttMzE1cXgzNGJ0dzJ1bnc0Z3hkZnBpbSJ9." \
                           "GEDuGnidtzWvTiXPCGIX4w"
     fig = px.choropleth_mapbox(df, geojson=geojson, locations='Group stations',
                                color='Status',
                                color_discrete_map={'Start': 'blue', 'End': 'red', 'Intermediate': 'yellow'},
-                               color_continuous_scale = 'Bluered',
+                               color_continuous_scale='Bluered',
                                mapbox_style="open-street-map",
                                featureidkey="properties.id",
-                               opacity=1,
-                               labels={'Status': 'Legend'})
+                               opacity=1, labels={'Status': 'Legend'})
 
     fig.update_layout(margin={"r": 0, "t": 0, "l": 0, "b": 10},
                       autosize=True,
@@ -259,12 +248,69 @@ def RenderFigure(df, geojson):
                       mapbox=go.layout.Mapbox(
                           dict(accesstoken=mapbox_access_token),
                           zoom=11, center={"lat": 51.5087, "lon": -0.1346},
-                          layers=[{
-                              'sourcetype': 'geojson',
-                              'source': geojson,
-                              'type': 'line',
-                          }]
-                      ),
-                      mapbox_style="streets"
+                          layers=[{'sourcetype': 'geojson',
+                                   'source': geojson,
+                                   'type': 'line'}]
+                      ), mapbox_style="streets"
                       )
     return fig
+
+
+def TubeDataframe():
+    data = pd.read_excel('../data/multi-year-station-entry-and-exit-figures.xls',
+                         sheet_name='2017 Entry & Exit (Zone 1)', skiprows=6)
+    df = pd.DataFrame(data)
+    df1 = pd.DataFrame(index=range(23), columns=['usage']).fillna(0)
+    df2 = df['Group Alphabet'].drop_duplicates().dropna().reset_index()
+
+    for x, poo in df1.iterrows():
+        for y, lines in df.iterrows():
+            if x == lines['Group Number']:
+                poo['usage'] += lines['million']
+
+    df3 = pd.concat([df1, df2['Group Alphabet']], axis=1, join='inner')
+
+    return df3
+
+
+def RenderTubeUsageGraph():
+    path = FindPath('Tube', 'Knightsbridge, South Kensington', "Angel")
+    df3 = TubeDataframe()
+    df3 = df3.iloc[path, :2]
+    fig = px.bar(df3, x="Group Alphabet", y="usage", title="entry/exit")
+
+    return fig
+
+
+def RenderBusLineGraph():
+    # List of top 5 worst bus routes at night according to Evening Standard
+    nightlist = [262, 30, 49, 191, 228]
+
+    # Creating dataframe for nightlist bus route usage using bus dataset
+    data = pd.ExcelFile('../data/bus-service-usage-18-19.xls')
+    df = pd.DataFrame(index=nightlist)
+    print(df)
+    for k in range(8):
+        page = '201' + str(k) + '-201' + str(k + 1)
+        if k == 6:
+            page = '2016-2017 original & rebased'
+        df1 = pd.read_excel(data, sheet_name=page, skiprows=2).iloc[:, 0:2].set_index("Route")
+        df1 = df1.loc[nightlist]
+        df = pd.concat([df, df1], axis=1)
+
+    year = pd.DataFrame({'Year': range(2010, 2018)})
+    df = df.T.reset_index().drop(columns='index')
+    df = pd.concat([year, df], axis=1)
+
+    # Plotting multiple lines
+    for route in nightlist:
+        plt.plot(df['Year'], df[route])
+
+    # Updating chart layout
+    plt.title('Yearly bus usage for top 5 busiest night bus route')
+    plt.xlabel('Year')
+    plt.ylabel('Bus usage')
+    plt.grid(True)
+    plt.legend(nightlist)
+
+    return plt

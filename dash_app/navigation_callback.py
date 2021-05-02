@@ -2,9 +2,12 @@ import dash_core_components as dcc
 from flask_login import current_user
 from dash.dependencies import Output, Input, State
 from dash_app.navigation_functions import AreaList, CreateBorders, CreateBordersWithPath
+from dash_app.navigation_layout import navigation_analysis, navigation_finder
 
 
 ## Create callback for changing line from dropdown
+
+
 def init_callback(app):
     @app.callback([Output("indicator", "children"),
                    Output("third_nav", "children"),
@@ -22,7 +25,7 @@ def init_callback(app):
         if not current_user.is_anonymous:
             name = current_user.username
             third_nav = 'My profile'
-            third_link = '/community/view_profile'
+            third_link = '/community/profile'
             forth_nav = 'Logout'
             forth_link = '/logout'
         return 'Welcome, {}!'.format(name), third_nav, third_link, forth_nav, forth_link
@@ -67,8 +70,7 @@ def init_callback(app):
         drop = [{"label": x, "value": x} for x in AreaList(mean_select)['Group stations']]
         return drop, drop, None, None, bus_clicked, tube_clicked, bus_bold, tube_bold
 
-    @app.callback([Output("line_figure", "children"),
-                   Output("go_button", "href")],
+    @app.callback(Output("line_figure", "children"),
                   [Input("bus_select", "outline"),
                    Input("tube_select", "outline"),
                    Input("start_select", "value"),
@@ -84,9 +86,8 @@ def init_callback(app):
             fig = CreateBordersWithPath(mean_select, start_select, end_select)
         else:
             fig = CreateBorders(mean_select, start_select, end_select)
-        link = '/navigation/{}/{}/{}'.format(mean_select, start_select, end_select)
 
-        return dcc.Graph(figure=fig), link
+        return dcc.Graph(figure=fig)
 
     @app.callback([Output("start_select", "value"),
                    Output("end_select", "value"),
@@ -96,8 +97,15 @@ def init_callback(app):
         if clear_n_clicks is not None:
             return None, None, None
 
-    @app.callback(
-        Output("search_form", "action"),
-        [Input("search_input", "value")])
-    def clear_selection(value):
+    @app.callback(Output("search_form", "action"),
+                  [Input("search_input", "value")])
+    def search_profile(value):
         return '/community/display_profiles/{}'.format(value)
+
+    @app.callback(Output("analysis_page", "style"),
+                  [Input("go_button", "n_clicks")])
+    def analysis_button(go_n_clicks):
+        if go_n_clicks is not None:
+            return {'display': 'block'}
+        else:
+            return {'display': 'none'}

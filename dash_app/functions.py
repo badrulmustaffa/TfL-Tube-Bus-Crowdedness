@@ -1,3 +1,4 @@
+import dash_core_components as dcc
 import plotly.graph_objects as go
 import matplotlib.pyplot as plt
 import plotly.express as px
@@ -227,7 +228,7 @@ def CreateBordersWithPath(mean, start, end):
         j += 1
 
     df = df.reset_index().dropna()
-    return RenderNavigationMap(df, geojson)
+    return RenderNavigationMap(df, geojson), path
 
 
 def RenderNavigationMap(df, geojson):
@@ -273,8 +274,8 @@ def TubeDataframe():
     return df3
 
 
-def RenderTubeUsageGraph():
-    path = FindPath('Tube', 'Knightsbridge, South Kensington', "Angel")
+def RenderTubeUsageGraph(path):
+    print(path)
     df3 = TubeDataframe()
     df3 = df3.iloc[path, :2]
     fig = px.bar(df3, x="Group Alphabet", y="usage", title="entry/exit")

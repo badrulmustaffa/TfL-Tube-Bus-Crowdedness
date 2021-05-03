@@ -37,8 +37,7 @@ def create_app(config_classname):
         db.create_all()
 
         # Import Dash application
-        from dash_app.navigation_application import navigation_dash
-        from dash_app.analysis_application import analysis_dash
+        from dash_app.application import navigation_dash, analysis_dash
         app = navigation_dash(app)
         app = analysis_dash(app)
 

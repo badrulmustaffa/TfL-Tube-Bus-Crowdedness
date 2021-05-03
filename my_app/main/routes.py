@@ -14,4 +14,4 @@ def index(name):
 @main_bp.route('/analysis', defaults={'name': 'traveler'})
 @main_bp.route('/analysis/<name>')
 def analysis(name):
-    return redirect('/navigation_analysis/')
+    return redirect('/analysis_dash/')

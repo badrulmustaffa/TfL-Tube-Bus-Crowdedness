@@ -54,14 +54,13 @@ def nav_buttons():
                                                         external_link=True)),
                                  dbc.NavbarToggler(id="navbar-toggler"),
                                  dbc.Collapse(id="navbar-collapse", navbar=True,
-                                              children=[nav_buttons]
-                                              ),
+                                              children=[nav_buttons]),
                              ]),
                                        ])
     return full_navbar
 
 
-def navigation_finder():
+def analysis_layout():
     page = dbc.Container(fluid=True, children=[
         # First row
         dbc.Row([
@@ -106,9 +105,9 @@ def navigation_finder():
                                     dbc.Button("Clear", id="clear_button", type='reset',
                                                color="primary", className="mr-2",
                                                n_clicks=0),
-                                    dbc.Button("Go", id="go_button", type='button',
+                                    dbc.Button("Go", id="go_button",
                                                color="primary", className="mr-2",
-                                               external_link='True',
+                                               href='/analysis_dash/', external_link='True',
                                                n_clicks=0),
                                 ])
                             ])
@@ -117,25 +116,27 @@ def navigation_finder():
             ]),
 
             # Second column
-            dbc.Col(width=8, children=[
-                dbc.Card(children=[
-                    dbc.Container(fluid=True, style={'display': 'inline-block', 'width': '100%'},
-                                  id="line_figure")
-                ]),
-            ]),
+            dbc.Col(width=8, children=[dcc.Store(id="path_memory", storage_type='session'),
+                                       dbc.Card(children=[
+                                           dbc.Container(fluid=True, style={'display': 'inline-block', 'width': '100%'},
+                                                         id="line_figure")
+                                       ]),
+                                       ]),
         ])
 
     ])
     return page
 
 
-def navigation_analysis():
-    page = dbc.Container(
-        [dbc.Card([
-            dcc.Graph(id='second_card', figure=RenderTubeUsageGraph())
-        ]),
-            dbc.Card([
-                dcc.Graph(id='third_card')
-            ])
+def navigation_layout():
+    page = dbc.Container([
+        html.H2('TfL Zone 1 Analysis'),
+        html.P(id="indicator"),
+        dbc.Card([dcc.Store(id="path_memory", storage_type='session'),
+                  dbc.Container(id='second_card')
+                  ]),
+        dbc.Card([
+            dbc.Container(id='third_card')
         ])
+    ])
     return page

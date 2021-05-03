@@ -1,7 +1,8 @@
 from flask_login import UserMixin
 from werkzeug.security import generate_password_hash, check_password_hash
-
+from slugify import slugify
 from my_app import db
+from datetime import datetime
 
 
 class User(UserMixin, db.Model):
@@ -30,4 +31,52 @@ class Profile(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
 
 
+class Category(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String, unique=True)
+    slug = db.Column(db.String, unique=True)
 
+    def __init__(self, name):
+        self.name = name
+        self.slug = slugify(name)
+
+    def __repr__(self):
+        return f"<Category {self.id}>"
+
+
+class Forum(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    category_id = db.Column(db.Integer, db.ForeignKey(Category.id))
+    name = db.Column(db.String, unique=True)
+    slug = db.Column(db.String, unique=True)
+    description = db.Column(db.String)
+
+    def __init__(self, category_id, name, description):
+        self.category_id = category_id
+        self.name = name
+        self.slug = slugify(name)
+        self.description = description
+
+
+class Thread(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    forum_id = db.Column(db.Integer, db.ForeignKey(Forum.id))
+    user_id = db.Column(db.Integer, db.ForeignKey(User.id))
+    title = db.Column(db.String(150))
+    slug = db.Column(db.String)
+    description = db.Column(db.String)
+    created_on = db.Column('created_on', db.DateTime, default=datetime.utcnow())
+
+    def __repr__(self):
+        return f"<Thread {self.id}>"
+
+
+class Post(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey(User.id))
+    thread_id = db.Column(db.Integer, db.ForeignKey(Thread.id))
+    content = db.Column(db.String)
+    created_on = db.Column('created_on', db.DateTime, default=datetime.utcnow())
+
+    def __repr__(self):
+        return f"<Post {self.id}"

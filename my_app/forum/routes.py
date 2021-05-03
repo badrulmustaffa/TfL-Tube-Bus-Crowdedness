@@ -2,13 +2,13 @@ from flask import Blueprint, render_template, redirect, url_for, request, flash,
 from flask_login import login_required, current_user
 from my_app.models import Category, Forum, Thread, db, Post, User
 from collections import OrderedDict
-from my_app.forum.forms import ThreadForm, PostForm, ForumForm, CategoryForm
+from my_app.forum.forms import ThreadForm, PostForm, ForumForm, CategoryForm, CreatePostForm
 from slugify import slugify
 
 forum_bp = Blueprint('forum_bp', __name__, url_prefix='/forum')
 
 
-@forum_bp.route('/index', defaults={'name': 'traveler'})
+@forum_bp.route('/')
 @login_required
 def index():
     categories = Category.query.all()
@@ -20,7 +20,7 @@ def index():
             threads = Thread.query.filter_by(forum_id=forum.id).all()
             forum_threads[forum] = threads
         category_forums_threads[category] = forum_threads
-    return render_template("forum.html", category_forums_threads=category_forums_threads)
+    return render_template("forum.html", category_forums_threads=category_forums_threads,)
 
 
 """def index(name):
@@ -45,7 +45,7 @@ def posts(name):
     return render_template('post_forum.html', title='Forum', name=name, form=form)
 
 
-@forum_bp.route('/show_category', defaults={'name': 'traveler'}, methods=['GET', 'POST'])
+@forum_bp.route("/<string:slug>", methods=['GET', 'POST'])
 @login_required
 def show_category(slug):
     category = Category.query.filter_by(slug=slug).first()
@@ -54,7 +54,7 @@ def show_category(slug):
     return render_template("showCategory.html", category=category)
 
 
-@forum_bp.route('/edit_category', defaults={'name': 'traveler'}, methods=['GET', 'POST'])
+@forum_bp.route("/edit/<slug>", methods=['GET', 'POST'])
 @login_required
 def edit_category(slug):
     category = Category.query.filter_by(slug=slug).first()
@@ -72,10 +72,10 @@ def edit_category(slug):
             category.name = form.name.data
             category.slug = slugify(form.name.data)
             db.session.commit()
-            return redirect(url_for("category.showCategory", slug=category.slug))
+            return redirect(url_for("category.showCategory", slug=category.slug,))
 
 
-@forum_bp.route('/delete_category', defaults={'name': 'traveler'}, methods=['GET', 'POST'])
+@forum_bp.route('"/delete/<slug>"', defaults={'name': 'traveler'}, methods=['GET', 'POST'])
 @login_required
 def delete_category(slug):
     category = Category.query.filter_by(slug=slug).first()

@@ -1,0 +1,21 @@
+{% extends 'layout.html' %}
+{% set title = 'Forum' %}
+{% from "_formhelpers.html" import render_field %}
+{% block content %}
+
+<form method="POST" action="{{ url_for('forum_bp.edit_category') }}">
+	{{ form.csrf_token }}
+		<dl>
+			{{ render_field(form.name, class="form-control") }}
+		</dl>
+	{% for error in form.errors %}
+		{{error}}
+	{% endfor %}
+	Category name: <input name="name" value="{{form.name.data}}">
+	<button type="submit">Create</button>
+
+</form>
+
+{% endblock %}
+
+

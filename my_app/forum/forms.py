@@ -3,12 +3,10 @@ from wtforms import SubmitField, StringField, TextAreaField, SelectField, valida
 from wtforms.validators import DataRequired
 
 
-'''
 class CreatePostForm(FlaskForm):
     content = TextAreaField(label='Post', description='Add content here', validators=[DataRequired()])
     reason = SelectField(choices=['Question', 'Complaint'], validators=[DataRequired()])
     submit = SubmitField()
-'''
 
 
 class ThreadForm(FlaskForm):

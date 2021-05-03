@@ -1,11 +1,14 @@
 import dash_core_components as dcc
 from flask_login import current_user
 from dash.dependencies import Output, Input, State
-from dash_app.navigation_functions import AreaList, CreateBorders
+from dash_app.functions import AreaList, CreateBorders, CreateBordersWithPath, RenderTubeUsageGraph
+from dash_app.layout import navigation_layout, analysis_layout
 
 
 ## Create callback for changing line from dropdown
-def init_callback(app):
+
+
+def dash_callback(app):
     @app.callback([Output("indicator", "children"),
                    Output("third_nav", "children"),
                    Output("third_nav", "href"),
@@ -14,18 +17,18 @@ def init_callback(app):
                   [Input("page_content", "id")])
     def load_navbar(input):
         """ Display navigations based on current user"""
-        name = 'Welcome, traveler!'
+        name = 'traveler'
         third_nav = 'Login'
         third_link = '/login'
         forth_nav = 'Sign up'
         forth_link = '/signup'
         if not current_user.is_anonymous:
-            name = 'Welcome, {}!'.format(current_user.username)
+            name = current_user.username
             third_nav = 'My profile'
-            third_link = '/community/view_profile'
+            third_link = '/community/profile'
             forth_nav = 'Logout'
             forth_link = '/logout'
-        return name, third_nav, third_link, forth_nav, forth_link
+        return 'Welcome, {}!'.format(name), third_nav, third_link, forth_nav, forth_link
 
     @app.callback(Output("navbar-collapse", "is_open"),
                   [Input("navbar-toggler", "n_clicks")],
@@ -64,11 +67,11 @@ def init_callback(app):
             tube_clicked = False
             bus_bold = False
             tube_bold = True
-        drop = [{"label": x, "value": x} for x in AreaList(mean_select)['Name']]
+        drop = [{"label": x, "value": x} for x in AreaList(mean_select)['Group stations']]
         return drop, drop, None, None, bus_clicked, tube_clicked, bus_bold, tube_bold
 
-    @app.callback([Output("line_figure", "children"),
-                   Output("go_button", "href")],
+    @app.callback(Output("line_figure", "children"),
+                  Output("path_memory", "data"),
                   [Input("bus_select", "outline"),
                    Input("tube_select", "outline"),
                    Input("start_select", "value"),
@@ -79,9 +82,14 @@ def init_callback(app):
             mean_select = 'Bus'
         if not tube_clicked:
             mean_select = 'Tube'
-        fig = CreateBorders(mean_select, start_select, end_select)
-        link = '/navigation/{}/{}/{}'.format(mean_select, start_select, end_select)
-        return dcc.Graph(figure=fig), link
+
+        if end_select:
+            fig, path = CreateBordersWithPath(mean_select, start_select, end_select)
+        else:
+            fig = CreateBorders(mean_select, start_select, end_select)
+            path = [0, 1]
+
+        return dcc.Graph(figure=fig), path
 
     @app.callback([Output("start_select", "value"),
                    Output("end_select", "value"),
@@ -91,8 +99,16 @@ def init_callback(app):
         if clear_n_clicks is not None:
             return None, None, None
 
-    @app.callback(
-        Output("search_form", "action"),
-        [Input("search_input", "value")])
-    def clear_selection(value):
+    @app.callback(Output("search_form", "action"),
+                  [Input("search_input", "value")])
+    def search_profile(value):
         return '/community/display_profiles/{}'.format(value)
+
+    @app.callback(Output("second_card", "children"),
+                  [Input("page_content", "id"),
+                   Input("path_memory", "data")])
+    def create_analysis(input, path):
+        mean_select = 'Tube'
+        fig = RenderTubeUsageGraph(path)
+        return dcc.Graph(figure=fig)
+

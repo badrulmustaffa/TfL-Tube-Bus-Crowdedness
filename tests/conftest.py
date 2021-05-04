@@ -6,8 +6,10 @@ from selenium.webdriver import ChromeOptions
 import multiprocessing
 from my_app import create_app
 from my_app.config import TestingConfig
+from my_app.models import User
 
 
+# Written by Nath
 @pytest.fixture(scope="session")
 def app(request):
     _app = create_app(TestingConfig)
@@ -38,7 +40,6 @@ def chrome_driver(request):
     #pass
 
 
-#@pytest_flask.fixture("live-server")
 @pytest.fixture(scope="class")
 def run_selenium(app):
     process = multiprocessing.Process(target=app.run, args=())
@@ -46,3 +47,12 @@ def run_selenium(app):
     yield process
     process.terminate()
     #pass
+
+
+@pytest.fixture(scope="function")
+def user(db):
+    user = User(firstname="First", lastname="Last", email="firstlast@ucl.ac.uk")
+    user.set_password('password1')
+    db.session.add(user)
+    db.session.commit()
+    return user

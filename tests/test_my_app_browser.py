@@ -1,6 +1,7 @@
 import pytest
 
 
+# Written by Nath
 @pytest.mark.usefixtures("chrome_driver", "run_selenium")
 class TestMyAppBrowser:
     def test_app_is_running(self, app):

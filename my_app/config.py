@@ -28,6 +28,8 @@ class TestingConfig(Config):
     ENV = 'testing'
     TESTING = True
     SQLALCHEMY_ECHO = True
+    #SQLALCHEMY_DATABASE_URI = 'sqlite:///:memory:'
+    WTF_CSRF_ENABLED = False
 
 # import secrets
 # print(secrets.token_urlsafe(16))

@@ -8,7 +8,7 @@ class TestMyAppBrowser:
         self.driver.get("http://127.0.0.1:5000/")
         assert self.driver.current_url == "http://127.0.0.1:5000/navigation_dash/"
 
-    def test_signup(self, client):
+    def test_signup(self):
         username = "testname"
         email = "test@ucl.ac.uk"
         password = "testpass"
@@ -43,7 +43,7 @@ class TestMyAppBrowser:
         self.driver.implicitly_wait(8)
 
         assert self.driver.current_url == "http://127.0.0.1:5000/login"
-        pass
+        #pass
 
     def test_forum(self):
         self.driver.find_element_by_id("forum-nav").click()
@@ -53,7 +53,7 @@ class TestMyAppBrowser:
         pass
 
     def test_user_search(self):
-        username = "nbell715"
+        username = "testname"
         self.driver.find_element_by_id("search_input").send_keys(username)
         self.driver.find_element_by_id("search_button").click()
         self.driver.implicitly_wait(8)
@@ -80,6 +80,7 @@ class TestMyAppBrowser:
         self.driver.find_element_by_xpath("end_select").click()
 
         self.driver.find_element_by_id("go_button").click()
+        self.driver.implicitly_wait(8)
 
         assert self.driver.current_url == "http://127.0.0.1:5000/analysis_dash/"
         #pass
@@ -89,6 +90,6 @@ class TestMyAppBrowser:
         self.driver.find_element_by_id("start_select").click()
         self.driver.find_element_by_id("end_select").click()
         self.driver.find_element_by_id("go_button").click()
-
+        self.driver.implicitly_wait(8)
         assert self.driver.current_url == "http://127.0.0.1:5000/analysis_dash/"
         #pass

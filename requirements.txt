@@ -68,6 +68,7 @@ Pygments==2.7.4
 pyparsing==2.4.7
 pyrsistent==0.17.3
 pytest~=6.2.2
+pytest-flask~=1.2.0
 python-dateutil==2.8.1
 pytz==2021.1
 pywin32==300

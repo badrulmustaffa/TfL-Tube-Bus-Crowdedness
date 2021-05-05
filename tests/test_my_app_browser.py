@@ -15,7 +15,7 @@ class TestMyAppBrowser:
         password = "testpass"
         password1 = "testpass"
 
-        self.driver.find_element_by_id("signup-nav").click()
+        self.driver.get("http://127.0.0.1:5000/signup")
         self.driver.implicitly_wait(8)
 
         self.driver.find_element_by_id("username").send_keys(username)
@@ -35,7 +35,7 @@ class TestMyAppBrowser:
         username = "testname"
         password = "wrongpass"
 
-        self.driver.find_element_by_id("login-nav").click()
+        self.driver.get("http://127.0.0.1:5000/login")
         self.driver.implicitly_wait(8)
 
         self.driver.find_element_by_id("username").send_keys(username)
@@ -43,15 +43,9 @@ class TestMyAppBrowser:
         self.driver.find_element_by_id("submit").click()
         self.driver.implicitly_wait(8)
 
-        assert self.driver.current_url == "http://127.0.0.1:5000/login"
+        message = self.driver.find_element_by_class_name("errors").find_element_by_tag_name("li").text
+        assert "Wrong password" in message
         #pass
-
-    def test_forum(self):
-        self.driver.find_element_by_id("forum-nav").click()
-        self.driver.implicitly_wait(8)
-
-
-        pass
 
     def test_user_search(self):
         username = "testname"
@@ -71,26 +65,4 @@ class TestMyAppBrowser:
 
         message = self.driver.find_element_by_class_name("list-unstyled").find_element_by_tag_name("li").text == "Username not found"
         assert "Username not found" in message
-        #pass
-
-    def test_tube_score(self):
-        self.driver.find_element_by_id("tube_select").click()
-        # Select one option in start
-        self.driver.find_element_by_id("start_select").click()
-
-        self.driver.find_element_by_xpath("end_select").click()
-
-        self.driver.find_element_by_id("go_button").click()
-        self.driver.implicitly_wait(8)
-
-        assert self.driver.current_url == "http://127.0.0.1:5000/analysis_dash/"
-        #pass
-
-    def test_bus_score(self):
-        self.driver.find_element_by_id("bus_select").click()
-        self.driver.find_element_by_id("start_select").click()
-        self.driver.find_element_by_id("end_select").click()
-        self.driver.find_element_by_id("go_button").click()
-        self.driver.implicitly_wait(8)
-        assert self.driver.current_url == "http://127.0.0.1:5000/analysis_dash/"
         #pass

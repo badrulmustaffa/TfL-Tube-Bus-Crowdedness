@@ -20,8 +20,7 @@ def index():
             threads = Thread.query.filter_by(forum_id=forum.id).all()
             forum_threads[forum] = threads
         category_forums_threads[category] = forum_threads
-    return render_template("forum.html", category_forums_threads=category_forums_threads,)
-
+    return render_template("forum.html", category_forums_threads=category_forums_threads, )
 
 """def index(name):
     if not current_user.is_anonymous:
@@ -72,7 +71,7 @@ def edit_category(slug):
             category.name = form.name.data
             category.slug = slugify(form.name.data)
             db.session.commit()
-            return redirect(url_for("category.showCategory", slug=category.slug,))
+            return redirect(url_for("category.showCategory", slug=category.slug, ))
 
 
 @forum_bp.route('"/delete/<slug>"', defaults={'name': 'traveler'}, methods=['GET', 'POST'])
@@ -110,13 +109,13 @@ def edit_forum(forum_slug):
         abort(401)
     form = ForumForm(request.form)
     if request.method == "GET":
-        return render_template("editForum.html",form=form,forum=forum)
+        return render_template("editForum.html", form=form, forum=forum)
     elif request.method == "POST":
         if not form.validate():
-            return render_template("editForum.html",form=form,forum=forum)
+            return render_template("editForum.html", form=form, forum=forum)
         elif form.name.data != forum.name:
             if Forum.query.filter_by(name=form.name.data).all():
-                return render_template("editForum.html",form=form,forum=forum,name_taken=True)
+                return render_template("editForum.html", form=form, forum=forum, name_taken=True)
         forum.name = form.name.data
         forum.slug = slugify(form.name.data)
         forum.description = form.description.data
@@ -197,14 +196,15 @@ def create_thread(forum_slug):
         abort(404)
     form = ThreadForm(request.form)
     if request.method == "GET":
-        return render_template("createThread.html",form=form,forum=forum)
+        return render_template("createThread.html", form=form, forum=forum)
     elif request.method == "POST":
         if not form.validate():
-            return render_template("createThread.html",form=form,forum=forum)
-        thread = Thread(forum_id=forum.id, user_id=current_user.id, title=form.title.data, slug=slugify(form.title.data), description=form.description.data)
+            return render_template("createThread.html", form=form, forum=forum)
+        thread = Thread(forum_id=forum.id, user_id=current_user.id, title=form.title.data,
+                        slug=slugify(form.title.data), description=form.description.data)
         db.session.add(thread)
         db.session.commit()
-        return redirect(url_for("thread.showThread",thread_slug=thread.slug))
+        return redirect(url_for("thread.showThread", thread_slug=thread.slug))
 
 
 @forum_bp.route('/edit_thread', defaults={'name': 'traveler'}, methods=['GET', 'POST'])

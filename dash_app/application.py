@@ -26,7 +26,7 @@ def navigation_dash(flask_app):
 
 def analysis_dash(flask_app):
     """Create a Plotly Dash dashboard"""
-    dash_app = dash.Dash(server=flask_app, title='Analysis', assets_folder='../dash_app/assets',
+    dash_app = dash.Dash(server=flask_app, title='analysis', assets_folder='../dash_app/assets',
                          routes_pathname_prefix="/analysis_dash/",
                          external_stylesheets=[dbc.themes.BOOTSTRAP, FA])
 

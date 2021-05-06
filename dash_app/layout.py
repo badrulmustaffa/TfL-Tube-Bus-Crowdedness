@@ -50,7 +50,7 @@ def nav_buttons():
                                      width=50,
                                      style={'margin-right': 10, 'margin-left': -19},
                                      className='img-thumbnail'),
-                                 html.A(dbc.NavbarBrand("Sander Squad", href="/",
+                                 html.A(dbc.NavbarBrand("Travelling Pants", href="/",
                                                         external_link=True)),
                                  dbc.NavbarToggler(id="navbar-toggler"),
                                  dbc.Collapse(id="navbar-collapse", navbar=True,

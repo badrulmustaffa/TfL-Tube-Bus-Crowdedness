@@ -54,9 +54,9 @@ class CreateCategory(CreateView):
 
     def get_post_redirect_args(self, model_instance):
         """return url_for("category.showCategory",category_slug=)"""
-        return {"slug":model_instance.slug}
+        return {"slug": model_instance.slug}
 
-    def create_model_instance(self,form):
+    def create_model_instance(self, form):
         return self.model(form.name.data)
 
 
@@ -79,5 +79,3 @@ class CreateForum(CreateView):
         if not category:
             abort(404)
         return self.model(category.id, form.name.data, form.description.data)
-
-

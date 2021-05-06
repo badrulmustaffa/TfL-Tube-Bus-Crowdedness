@@ -22,6 +22,7 @@ def index():
         category_forums_threads[category] = forum_threads
     return render_template("forum.html", category_forums_threads=category_forums_threads, )
 
+
 """def index(name):
     if not current_user.is_anonymous:
         name = current_user.username

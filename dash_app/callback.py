@@ -1,7 +1,8 @@
 import dash_core_components as dcc
 from flask_login import current_user
 from dash.dependencies import Output, Input, State
-from dash_app.functions import AreaList, CreateBorders, CreateBordersWithPath, RenderTubeUsageGraph
+from dash_app.functions import AreaList, CreateBorders, CreateBordersWithPath, RenderTubeUsageGraph, \
+    BusDataframeAndRenderGraph
 from dash_app.layout import navigation_layout, analysis_layout
 
 
@@ -72,6 +73,7 @@ def dash_callback(app):
 
     @app.callback(Output("line_figure", "children"),
                   Output("path_memory", "data"),
+                  Output("mean_memory", "data"),
                   [Input("bus_select", "outline"),
                    Input("tube_select", "outline"),
                    Input("start_select", "value"),
@@ -89,7 +91,7 @@ def dash_callback(app):
             fig = CreateBorders(mean_select, start_select, end_select)
             path = [0, 1]
 
-        return dcc.Graph(figure=fig), path
+        return dcc.Graph(figure=fig), path, mean_select
 
     @app.callback([Output("start_select", "value"),
                    Output("end_select", "value"),
@@ -106,9 +108,11 @@ def dash_callback(app):
 
     @app.callback(Output("second_card", "children"),
                   [Input("page_content", "id"),
+                   Input("mean_memory", "data"),
                    Input("path_memory", "data")])
-    def create_analysis(input, path):
-        mean_select = 'Tube'
-        fig = RenderTubeUsageGraph(path)
+    def create_analysis(input, mean, path):
+        fig = BusDataframeAndRenderGraph(path)
+        if 'Tube' in mean:
+            fig = RenderTubeUsageGraph(path)
         return dcc.Graph(figure=fig)
 

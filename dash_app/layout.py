@@ -3,8 +3,6 @@ import dash_bootstrap_components as dbc
 import dash_core_components as dcc
 import dash_html_components as html
 
-from dash_app.functions import RenderTubeUsageGraph, RenderBusLineGraph
-
 
 def logo():
     image_filename = '../my_app/static/img/SarahSquad.png'  # replace with your own image
@@ -117,6 +115,7 @@ def analysis_layout():
 
             # Second column
             dbc.Col(width=8, children=[dcc.Store(id="path_memory", storage_type='session'),
+                                       dcc.Store(id="mean_memory", storage_type='session'),
                                        dbc.Card(children=[
                                            dbc.Container(fluid=True, style={'display': 'inline-block', 'width': '100%'},
                                                          id="line_figure")
@@ -133,6 +132,7 @@ def navigation_layout():
         html.H2('TfL Zone 1 Analysis'),
         html.P(id="indicator"),
         dbc.Card([dcc.Store(id="path_memory", storage_type='session'),
+                  dcc.Store(id="mean_memory", storage_type='session'),
                   dbc.Container(id='second_card')
                   ]),
         dbc.Card([

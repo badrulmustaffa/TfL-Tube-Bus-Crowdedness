@@ -278,40 +278,63 @@ def RenderTubeUsageGraph(path):
     print(path)
     df3 = TubeDataframe()
     df3 = df3.iloc[path, :2]
-    fig = px.bar(df3, x="Group Alphabet", y="usage", title="entry/exit")
+    fig = px.bar(df3, x="Group Alphabet", y="Usage", title="Tube total entry/exit as of today")
 
     return fig
 
 
-def RenderBusLineGraph():
-    # List of top 5 worst bus routes at night according to Evening Standard
-    nightlist = [262, 30, 49, 191, 228]
+def BusDataframeAndRenderGraph(path):
+    data1 = pd.read_excel('../data/Tube_and_Bus_Route_Stops.xls',
+                          sheet_name='Bus Regions', skiprows=1)
 
-    # Creating dataframe for nightlist bus route usage using bus dataset
-    data = pd.ExcelFile('../data/bus-service-usage-18-19.xls')
-    df = pd.DataFrame(index=nightlist)
-    print(df)
-    for k in range(8):
-        page = '201' + str(k) + '-201' + str(k + 1)
-        if k == 6:
-            page = '2016-2017 original & rebased'
-        df1 = pd.read_excel(data, sheet_name=page, skiprows=2).iloc[:, 0:2].set_index("Route")
-        df1 = df1.loc[nightlist]
-        df = pd.concat([df, df1], axis=1)
+    raw = pd.DataFrame(data1)
+    raw = raw[['Number', 'Day Routes']]
 
-    year = pd.DataFrame({'Year': range(2010, 2018)})
-    df = df.T.reset_index().drop(columns='index')
-    df = pd.concat([year, df], axis=1)
+    data2 = pd.read_excel('../data/Tube_and_Bus_Route_Stops.xls',
+                          sheet_name='Bus Regions Simplified', skiprows=1)
 
-    # Plotting multiple lines
-    for route in nightlist:
-        plt.plot(df['Year'], df[route])
+    bus_data = pd.DataFrame(data2).iloc[:, 1:]
+    bus_data['Day Routes'] = 0
 
-    # Updating chart layout
-    plt.title('Yearly bus usage for top 5 busiest night bus route')
-    plt.xlabel('Year')
-    plt.ylabel('Bus usage')
-    plt.grid(True)
-    plt.legend(nightlist)
+    for x, poo in bus_data.iterrows():
+        for y, lines in raw.iterrows():
+            if x == lines['Number']:
+                bus_data.loc[x, 'Day Routes'] = lines['Day Routes']
 
-    return plt
+    data3 = pd.read_excel('../data/bus-service-usage-18-19.xls', sheet_name='2017-2018', skiprows=2)
+    stops = [0] * len(bus_data['Day Routes'])
+
+    for x in path:
+        stops[x] = bus_data.loc[x, 'Day Routes']
+
+    stops = [i for i in stops if i != 0]
+    stops_again = []
+
+    for y in range(len(stops)):
+        if isinstance(stops[y], str):
+            li = list(stops[y].split(","))
+        else:
+            li = str(stops[y])
+        stops_again.append(li)
+
+    bus_entries = pd.DataFrame(index=range(18), columns=['Usage']).fillna(0)
+    bus_data['Usage'] = 0
+
+    for x, find in bus_data.iterrows():
+        if isinstance(find['Day Routes'], str):
+            current_line = list(find['Day Routes'].split(","))
+        for r in current_line:
+            r = int(r)
+            for s, finding in data3.iterrows():
+                if r == finding['Route']:
+                    find['Usage'] += finding['Usage recorded: 2017/18']
+        bus_entries.iloc[x]['Usage'] = find['Usage']
+
+    bus_entries['Group Alphabet'] = bus_data['Alphabet']
+
+    bus_entries_again = pd.concat([bus_data['Number'], bus_entries], axis=1, join='inner')
+    df3 = bus_entries_again.iloc[path]
+    bus_graph = px.bar(df3, x="Group Alphabet", y="Usage", title="Bus passengers as of today")
+
+    return bus_graph
+

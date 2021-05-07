@@ -28,8 +28,12 @@ def nav_buttons():
                                               children="Home")
                                    ]),
                                    html.Li(className="nav-item", children=[
-                                       html.A(className="nav-link", href="/forum",
+                                       html.A(className="nav-link", href="/forum/post",
                                               children="Forum")
+                                   ]),
+                                   html.Li(className="nav-item", children=[
+                                       html.A(className="nav-link", href="/blog",
+                                              children="Blog")
                                    ]),
                                    html.Li(className="nav-item", children=[
                                        html.A(className="nav-link", id="third_nav")

@@ -1,8 +1,6 @@
 from flask import render_template
 from flask import Blueprint, render_template, redirect, url_for, request, flash, abort
 from flask_login import login_required, current_user
-from my_app.models import *
-from my_app import app
 from my_app.forum.comments_forms import CommentForm
 import json
 from datetime import datetime as dt

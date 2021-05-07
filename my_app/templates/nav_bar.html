@@ -16,8 +16,14 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{{ url_for("forum_bp.post") }}">Forum</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ url_for("blog_bp.index") }}">Blog</a>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                       data-bs-toggle="dropdown" aria-expanded="false">Blog</a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" href="{{ url_for('blog_bp.index') }}">View posts</a></li>
+                        <li><a class="dropdown-item" href="{{ url_for('blog_bp.add') }}">Add post</a></li>
+                        <li><a class="dropdown-item" href="{{ url_for('blog_bp.about') }}">About us</a></li>
+                    </ul>
                 </li>
 
                 {% if current_user.is_anonymous %}

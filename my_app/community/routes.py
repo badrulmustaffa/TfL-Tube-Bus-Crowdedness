@@ -3,7 +3,7 @@ from flask_login import login_required, current_user
 
 from my_app import db, photos
 from my_app.community.forms import ProfileForm
-from my_app.models import Profile, User
+from my_app.models import Profile, User, History
 
 community_bp = Blueprint('community_bp', __name__, url_prefix='/community')
 
@@ -85,7 +85,6 @@ def update_profile():
 @login_required
 def display_profiles(username=None):
     results = None
-    profile_html = 'profile_display.html'
     if username is None:
         if request.method == 'POST':
             term = request.form['search_term']
@@ -105,24 +104,23 @@ def display_profiles(username=None):
         if result.photo:
             url = photos.url(result.photo)
             urls.append(url)
-    return render_template(profile_html, profiles=zip(results, urls))
+    return render_template('profile_display.html', profiles=zip(results, urls))
 
 
 @community_bp.route('/view_profile', methods=['GET', 'POST'])
 @community_bp.route('/view_profile/<username>', methods=['POST', 'GET'])
 @login_required
 def view_profile(username=None):
-    profile_html = 'profile_view.html'
     if username is None:
         username = current_user.username
 
     results = Profile.query.filter_by(username=username).all()
-
+    history = History.query.filter_by(user_id=current_user.id).all()
     urls = []
     for result in results:
         if result.photo:
             url = photos.url(result.photo)
             urls.append(url)
-    return render_template(profile_html, profiles=zip(results, urls))
+    return render_template('profile_view.html', profiles=zip(results, urls), history=history)
 
 

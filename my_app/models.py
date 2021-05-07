@@ -41,6 +41,16 @@ class History(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
 
 
+class Blogpost(db.Model):
+    __tablename__ = "blogpost"
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(50))
+    subtitle = db.Column(db.String(50))
+    author = db.Column(db.String(20))
+    date_posted = db.Column(db.DateTime)
+    content = db.Column(db.Text)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+
 class Category(db.Model):
     __tablename__ = "category"
     id = db.Column(db.Integer, primary_key=True)

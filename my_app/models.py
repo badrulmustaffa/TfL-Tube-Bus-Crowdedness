@@ -31,7 +31,18 @@ class Profile(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
 
 
+class History(db.Model):
+    __tablename__ = "history"
+    id = db.Column(db.Integer, primary_key=True)
+    time = db.Column('created_on', db.DateTime, default=datetime.utcnow())
+    mean = db.Column(db.Text)
+    start = db.Column(db.Text)
+    end = db.Column(db.Text)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+
+
 class Category(db.Model):
+    __tablename__ = "category"
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String, unique=True)
     slug = db.Column(db.String, unique=True)
@@ -45,6 +56,7 @@ class Category(db.Model):
 
 
 class Forum(db.Model):
+    __tablename__ = "forum"
     id = db.Column(db.Integer, primary_key=True)
     category_id = db.Column(db.Integer, db.ForeignKey(Category.id))
     name = db.Column(db.String, unique=True)
@@ -59,6 +71,7 @@ class Forum(db.Model):
 
 
 class Thread(db.Model):
+    __tablename__ = "thread"
     id = db.Column(db.Integer, primary_key=True)
     forum_id = db.Column(db.Integer, db.ForeignKey(Forum.id))
     user_id = db.Column(db.Integer, db.ForeignKey(User.id))
@@ -72,6 +85,7 @@ class Thread(db.Model):
 
 
 class Post(db.Model):
+    __tablename__ = "post"
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey(User.id))
     thread_id = db.Column(db.Integer, db.ForeignKey(Thread.id))

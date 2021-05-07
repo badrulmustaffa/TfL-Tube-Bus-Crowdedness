@@ -257,33 +257,7 @@ def RenderNavigationMap(df, geojson):
     return fig
 
 
-def TubeDataframe():
-    data = pd.read_excel('../data/multi-year-station-entry-and-exit-figures.xls',
-                         sheet_name='2017 Entry & Exit (Zone 1)', skiprows=6)
-    df = pd.DataFrame(data)
-    df1 = pd.DataFrame(index=range(23), columns=['usage']).fillna(0)
-    df2 = df['Group Alphabet'].drop_duplicates().dropna().reset_index()
-
-    for x, poo in df1.iterrows():
-        for y, lines in df.iterrows():
-            if x == lines['Group Number']:
-                poo['usage'] += lines['million']
-
-    df3 = pd.concat([df1, df2['Group Alphabet']], axis=1, join='inner')
-
-    return df3
-
-
-def RenderTubeUsageGraph(path):
-    print(path)
-    df3 = TubeDataframe()
-    df3 = df3.iloc[path, :2]
-    fig = px.bar(df3, x="Group Alphabet", y="Usage", title="Tube total entry/exit as of today")
-
-    return fig
-
-
-def BusDataframeAndRenderGraph(path):
+def BusDataframe(path):
     data1 = pd.read_excel('../data/Tube_and_Bus_Route_Stops.xls',
                           sheet_name='Bus Regions', skiprows=1)
 
@@ -331,10 +305,39 @@ def BusDataframeAndRenderGraph(path):
         bus_entries.iloc[x]['Usage'] = find['Usage']
 
     bus_entries['Group Alphabet'] = bus_data['Alphabet']
-
     bus_entries_again = pd.concat([bus_data['Number'], bus_entries], axis=1, join='inner')
-    df3 = bus_entries_again.iloc[path]
-    bus_graph = px.bar(df3, x="Group Alphabet", y="Usage", title="Bus passengers as of today")
+    df3 = bus_entries_again.drop(columns=['Number']).iloc[path]
+    return df3
 
-    return bus_graph
 
+def TubeDataframe(path):
+    data = pd.read_excel('../data/multi-year-station-entry-and-exit-figures.xls',
+                         sheet_name='2017 Entry & Exit (Zone 1)', skiprows=6)
+    df = pd.DataFrame(data)
+    df1 = pd.DataFrame(index=range(23), columns=['Usage']).fillna(0)
+    df2 = df['Group Alphabet'].drop_duplicates().dropna().reset_index()
+
+    for x, poo in df1.iterrows():
+        for y, lines in df.iterrows():
+            if x == lines['Group Number']:
+                poo['Usage'] += lines['million']
+
+    df3 = pd.concat([df1, df2['Group Alphabet']], axis=1, join='inner')
+    df3 = df3.iloc[path, :2]
+    return df3
+
+
+def RenderUsageGraph(df3, title):
+    fig = px.bar(df3, x="Group Alphabet", y="Usage", title="{} as of today".format(title))
+    return fig
+
+
+def CreateTableDataframe(mean, df3):
+    data = pd.ExcelFile('../data/Tube_and_Bus_Route_Stops.xls')
+    sheet = 'Tube Regions Simplified'
+    if 'Bus' in mean:
+        sheet = 'Bus Regions Simplified'
+    df = pd.read_excel(data, sheet_name=sheet, skiprows=1)
+    df = df[{'Alphabet', 'Group stations'}].rename(columns={"Group stations": "Group Stations"})
+    df3 = df3.merge(df, left_on='Group Alphabet', right_on='Alphabet').drop(columns=['Alphabet', 'Usage'])
+    return df3

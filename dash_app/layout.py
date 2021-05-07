@@ -58,7 +58,7 @@ def nav_buttons():
     return full_navbar
 
 
-def analysis_layout():
+def navigation_layout():
     page = dbc.Container(fluid=True, children=[
         # First row
         dbc.Row([
@@ -79,7 +79,7 @@ def analysis_layout():
                                         outline=False, n_clicks=0,
                                         active=True, style={'margin-right': 10}),
                                         dbc.Button(
-                                            [html.I(className="fas fa-subway mr-2"), "TRAIN"]
+                                            [html.I(className="fas fa-subway mr-2"), "TUBE"]
                                             , id="tube_select", color="success",
                                             outline=True, n_clicks=0)],
                                     header="Transportation mode:",
@@ -114,29 +114,47 @@ def analysis_layout():
             ]),
 
             # Second column
-            dbc.Col(width=8, children=[dcc.Store(id="path_memory", storage_type='session'),
-                                       dcc.Store(id="mean_memory", storage_type='session'),
-                                       dbc.Card(children=[
-                                           dbc.Container(fluid=True, style={'display': 'inline-block', 'width': '100%'},
-                                                         id="line_figure")
-                                       ]),
-                                       ]),
+            dbc.Col(width=8, children=[dbc.Card(children=[
+                dbc.Container(fluid=True, style={'display': 'inline-block', 'width': '100%'}, children=[
+                    html.Br(),
+                    html.H4("Important Information:"),
+                    html.P("There will be a disruption in Tower Hill area for both Tube and Bus services")
+                ]),
+            ]),
+                dcc.Store(id="path_memory", storage_type='session'),
+                dcc.Store(id="mean_memory", storage_type='session'),
+                dbc.Card(children=[
+                    dbc.Container(fluid=True, style={'display': 'inline-block', 'width': '100%'},
+                                  id="line_figure")
+                ]),
+            ]),
         ])
 
     ])
     return page
 
 
-def navigation_layout():
-    page = dbc.Container([
-        html.H2('TfL Zone 1 Analysis'),
-        html.P(id="indicator"),
-        dbc.Card([dcc.Store(id="path_memory", storage_type='session'),
-                  dcc.Store(id="mean_memory", storage_type='session'),
-                  dbc.Container(id='second_card')
-                  ]),
-        dbc.Card([
-            dbc.Container(id='third_card')
-        ])
-    ])
+def analysis_layout():
+    page = dbc.Container(fluid=True, style={'margin-bottom': 10},
+                         children=[
+                             html.H2('TfL Zone 1 Analysis'),
+                             html.P(id="indicator"),
+                             dbc.Card([
+                                 dbc.Container(id='first_card')
+                             ]),
+                             dbc.Card([dcc.Store(id="path_memory", storage_type='session'),
+                                       dcc.Store(id="mean_memory", storage_type='session'),
+                                       dcc.Store(id="dataframe_memory"),
+                                       dbc.Container(id='second_card')
+                                       ]),
+                             dbc.Card([
+                                 dbc.Container(id='third_card', style={'display': 'inline-block', 'margin-bottom': 40},
+                                               children=[
+                                     html.Br(),
+                                     dbc.Button("New Navigation", id="save_journey", color='primary', external_link=True),
+                                     html.Span(style={'margin-bottom': 40, "margin-left": 10, "vertical-align": "middle"},
+                                               children="This will also save your journey in your profile travel history"),
+                                 ])
+                             ]),
+                         ])
     return page

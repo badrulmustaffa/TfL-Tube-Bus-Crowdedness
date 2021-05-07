@@ -1,9 +1,11 @@
 import dash_core_components as dcc
+import dash_bootstrap_components as dbc
+import pandas as pd
 from flask_login import current_user
 from dash.dependencies import Output, Input, State
-from dash_app.functions import AreaList, CreateBorders, CreateBordersWithPath, RenderTubeUsageGraph, \
-    BusDataframeAndRenderGraph
-from dash_app.layout import navigation_layout, analysis_layout
+from dash_app.functions import AreaList, CreateBorders, CreateBordersWithPath, RenderUsageGraph, TubeDataframe, \
+    BusDataframe, CreateTableDataframe
+from dash_app.layout import analysis_layout, navigation_layout
 
 
 ## Create callback for changing line from dropdown
@@ -106,13 +108,38 @@ def dash_callback(app):
     def search_profile(value):
         return '/community/display_profiles/{}'.format(value)
 
+
+    @app.callback(Output("dataframe_memory", "data"),
+                  [Input("analysis_page", "id"),
+                   Input("mean_memory", "data"),
+                   Input("path_memory", "data")])
+    def create_graph(input, mean, path):
+        if 'Tube' in mean:
+            return TubeDataframe(path).to_dict()
+        return BusDataframe(path).to_dict()
+
+
     @app.callback(Output("second_card", "children"),
                   [Input("page_content", "id"),
                    Input("mean_memory", "data"),
-                   Input("path_memory", "data")])
-    def create_analysis(input, mean, path):
-        fig = BusDataframeAndRenderGraph(path)
-        if 'Tube' in mean:
-            fig = RenderTubeUsageGraph(path)
-        return dcc.Graph(figure=fig)
+                   Input("dataframe_memory", "data")])
+    def create_graph(input, mean, df):
+        df = pd.DataFrame.from_dict(df)
+        title = 'Tube total entry/exit'
+        if 'Bus' in mean:
+            title = 'Bus passengers'
+        return dcc.Graph(figure=RenderUsageGraph(df, title))
 
+    @app.callback(Output("first_card", "children"),
+                  Output("save_journey", "href"),
+                  [Input("page_content", "id"),
+                   Input("mean_memory", "data"),
+                   Input("dataframe_memory", "data")])
+    def create_graph(input, mean, df):
+        df = CreateTableDataframe(mean, pd.DataFrame.from_dict(df))
+        table = dbc.Table.from_dataframe(df, striped=True, bordered=True)
+
+        start = df['Group Stations'].iloc[0]
+        end = df['Group Stations'].iloc[-1]
+        link = '/save/{}/{}/{}'.format(mean, start, end)
+        return table, link

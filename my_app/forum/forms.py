@@ -5,5 +5,5 @@ from wtforms.widgets import TextArea
 
 
 class CommentForm(FlaskForm):
-    comment = TextField('Comment', widget=TextArea(), validators=[DataRequired()])
     reason = SelectField(choices=['Question', 'Complaint'], validators=[DataRequired()])
+    comment = TextField('Comment', widget=TextArea(), validators=[DataRequired()])

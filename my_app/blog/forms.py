@@ -1,4 +1,4 @@
-# Done by Muhammad Mustaffa
+# Done by Muhammad Mustaffa and Farhan Basir Ul' Elmi
 
 from flask_wtf import FlaskForm
 from wtforms import StringField, TextAreaField

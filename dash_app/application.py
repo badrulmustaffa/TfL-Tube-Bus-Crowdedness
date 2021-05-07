@@ -2,8 +2,7 @@
 import dash
 import dash_html_components as html
 import dash_bootstrap_components as dbc
-import dash_core_components as dcc
-from dash_app.layout import logo, nav_buttons, navigation_layout, analysis_layout
+from dash_app.layout import nav_buttons, navigation_layout, analysis_layout
 from dash_app.callback import dash_callback
 
 FA = "https://use.fontawesome.com/releases/v5.12.1/css/all.css"

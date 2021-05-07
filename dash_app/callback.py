@@ -5,7 +5,6 @@ from flask_login import current_user
 from dash.dependencies import Output, Input, State
 from dash_app.functions import AreaList, CreateBorders, CreateBordersWithPath, RenderUsageGraph, TubeDataframe, \
     BusDataframe, CreateTableDataframe
-from dash_app.layout import analysis_layout, navigation_layout
 
 
 ## Create callback for changing line from dropdown

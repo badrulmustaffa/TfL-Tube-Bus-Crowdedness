@@ -172,3 +172,4 @@ def analysis_layout():
                              ]),
                          ])
     return page
+

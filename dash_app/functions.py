@@ -1,6 +1,4 @@
-import dash_core_components as dcc
 import plotly.graph_objects as go
-import matplotlib.pyplot as plt
 import plotly.express as px
 import pandas as pd
 import numpy as np

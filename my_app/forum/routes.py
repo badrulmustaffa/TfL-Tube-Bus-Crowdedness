@@ -1,5 +1,4 @@
-from flask import render_template
-from flask import Blueprint, render_template, redirect, url_for, request, flash, abort
+from flask import Blueprint, render_template, flash, redirect, url_for
 from flask_login import login_required, current_user
 from datetime import datetime
 
@@ -30,4 +29,6 @@ def post():
                      date_posted=datetime.now())
         db.session.add(post)
         db.session.commit()
+        flash("Comment submitted!")
+        return redirect(url_for('forum_bp.post'))
     return render_template('comments_forum.html', form=form)

@@ -1,9 +1,8 @@
-from flask import Blueprint, render_template, redirect, url_for, request, flash
-from flask_login import login_required, current_user
+from flask import Blueprint, redirect, url_for
+from flask_login import current_user
 
-from my_app import db, photos
-from my_app.community.forms import ProfileForm
-from my_app.models import User, History
+from my_app import db
+from my_app.models import History
 
 main_bp = Blueprint('main_bp', __name__)
 

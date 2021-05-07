@@ -4,6 +4,10 @@ from my_app.models import Category, Forum, Thread, db, Post, User
 from collections import OrderedDict
 from my_app.forum.forms import ThreadForm, PostForm, ForumForm, CategoryForm, CreatePostForm
 from slugify import slugify
+from my_app.forum.comments_forms import CommentForm
+import json
+from datetime import datetime as dt
+import os
 
 forum_bp = Blueprint('forum_bp', __name__, url_prefix='/forum')
 
@@ -36,22 +40,32 @@ def index():
 """
 
 
-@forum_bp.route('/posts', defaults={'name': 'traveler'}, methods=['GET', 'POST'])
+@forum_bp.route('/post', methods=['GET', 'POST'])
 @login_required
-def posts(name):
-    if not current_user.is_anonymous:
-        name = current_user.username
-    form = PostForm
-    return render_template('post_forum.html', title='Forum', name=name, form=form)
+def post():
+    path = os.path.abspath("static/comments.json")
+    with open(path, 'r') as file:
+        comments = json.load(file)
+
+    form = CommentForm()
+    if form.validate_on_submit():
+        comment = form.comment.data.strip()
+        timestamp = dt.now().strftime('%c')
+        comments[timestamp] = comment
+        with open(path, 'w') as outfile:
+            json.dump(comments, outfile)
+        return redirect(url_for('forum_bp.show_posts'))
+
+    return render_template('comments_forum.html', form=form, comments=comments)
 
 
-@forum_bp.route("/<string:slug>", methods=['GET', 'POST'])
+@forum_bp.route("/show_posts", methods=['GET'])
 @login_required
-def show_category(slug):
-    category = Category.query.filter_by(slug=slug).first()
-    if not category:
-        abort(404)
-    return render_template("showCategory.html", category=category)
+def show_posts():
+    path = os.path.abspath("static/comments.json")
+    with open(path, 'r') as file:
+        comments = json.load(file)
+    return render_template('show_posts.html', comments=comments)
 
 
 @forum_bp.route("/edit/<slug>", methods=['GET', 'POST'])

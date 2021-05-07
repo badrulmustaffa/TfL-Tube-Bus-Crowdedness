@@ -1,0 +1,18 @@
+{% extends 'layout.html' %}
+{% set title = 'Forum' %}
+{% from "_formhelpers.html" import render_field %}
+{% block content %}
+    <h1>Create a new post:</h1>
+    <br>
+    <br>
+  <!--  <form action="/post" method="POST" novalidate> -->
+    <form action="{{ url_for('forum_bp.show_posts') }}" method="POST" novalidate>
+     {{ form.hidden_tag()  }}
+    <p>
+        Reason: {{ form.reason(class='form-control') }}
+        Post: {{ form.comment(class='form-control') }}
+
+    </p>
+            <p>{{ form.submit() }}</p>
+    </form>
+{% endblock %}

@@ -1,8 +1,8 @@
+# Done by Muhammad Mustaffa
+
 from flask_wtf import FlaskForm
 from flask_wtf.file import FileAllowed
 from wtforms import TextAreaField, FileField
-# from wtforms.ext.sqlalchemy.fields import QuerySelectField
-# from wtforms.validators import DataRequired, ValidationError
 
 from my_app import photos
 

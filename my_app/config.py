@@ -1,4 +1,4 @@
-"""Flask config class."""
+# Done by Muhammad Mustaffa
 from pathlib import Path
 
 

@@ -1,3 +1,5 @@
+# Written by Nath
+
 import pytest
 import pytest_flask
 from selenium import webdriver
@@ -9,7 +11,6 @@ from my_app.config import TestingConfig
 from my_app.models import User
 
 
-# Written by Nath
 @pytest.fixture(scope="session")
 def app(request):
     _app = create_app(TestingConfig)

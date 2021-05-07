@@ -1,3 +1,5 @@
+# Done by Muhammad Mustaffa
+
 from datetime import timedelta
 from sqlite3 import IntegrityError
 from urllib.parse import urlparse, urljoin

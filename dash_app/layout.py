@@ -32,9 +32,17 @@ def nav_buttons():
                                               children="Forum")
                                    ]),
                                    html.Li(className="nav-item", children=[
-                                       html.A(className="nav-link", href="/blog",
-                                              children="Blog")
+                                       dbc.DropdownMenu(nav=True, in_navbar=True, label="Blog",
+                                                        children=[
+                                                            dbc.DropdownMenuItem("View posts", href="/blog",
+                                                                                 external_link=True),
+                                                            dbc.DropdownMenuItem("Add post", href="/blog/add",
+                                                                                 external_link=True),
+                                                            dbc.DropdownMenuItem("About us", href="/about",
+                                                                                 external_link=True),
+                                                        ]),
                                    ]),
+
                                    html.Li(className="nav-item", children=[
                                        html.A(className="nav-link", id="third_nav")
                                    ]),
@@ -154,11 +162,13 @@ def analysis_layout():
                              dbc.Card([
                                  dbc.Container(id='third_card', style={'display': 'inline-block', 'margin-bottom': 40},
                                                children=[
-                                     html.Br(),
-                                     dbc.Button("New Navigation", id="save_journey", color='primary', external_link=True),
-                                     html.Span(style={'margin-bottom': 40, "margin-left": 10, "vertical-align": "middle"},
-                                               children="This will also save your journey in your profile travel history"),
-                                 ])
+                                                   html.Br(),
+                                                   dbc.Button("New Navigation", id="save_journey", color='primary',
+                                                              external_link=True),
+                                                   html.Span(style={'margin-bottom': 40, "margin-left": 10,
+                                                                    "vertical-align": "middle"},
+                                                             children="This will also save your journey in your profile travel history"),
+                                               ])
                              ]),
                          ])
     return page

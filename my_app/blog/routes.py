@@ -29,6 +29,7 @@ def about():
 
 
 @blog_bp.route('/add', methods=['GET', 'POST'])
+@login_required
 def add():
     form = BlogForm()
     if request.method == 'POST':
